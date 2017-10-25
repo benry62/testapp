@@ -1,0 +1,6 @@
+<h2>edit School</h2>
+
+<%= form_for @school do |f| %>
+  <p><%= f.label :name %> <%= f.text_field :name %></p>
+  <p><%= f.submit "update" %>
+<% end %>

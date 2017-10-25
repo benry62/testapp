@@ -1,7 +1,4 @@
 <h2> Departments</h2>
-
-<% @department.each do |s| %>
-  <p><%= link_to s.name, s %> | <%= s.school.name %> | <%= link_to "edit", edit_department_path(s.id) %></p>
+<% @department.each do |d| %>
+  <p><%= link_to d.name, school_department_path(id: d.id) %> | <%= d.school.name %> | </p>
 <% end %>
-
-<%= link_to "New Department", new_department_path %>

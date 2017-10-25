@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
-  resources :schools
-  resources :departments
+  resources :schools do
+    resources :departments do
+    end
+  end
+
+
   resources :teachers
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

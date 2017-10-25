@@ -1,5 +1,19 @@
 <h2>Show</h2>
 
 <p><%= @school.name %></p>
+<%= link_to 'edit', edit_school_path %> | <%= link_to 'back', schools_path %>
 
-<%= link_to 'edit', edit_school_path %> | <%= link_to 'back', schools_path %> 
+
+<h3>Departments</h3>
+<% @departments.each do |d| %>
+  <p><%= d.name %></p>
+<% end %>
+
+<%= link_to 'create new department', new_school_department_path(@school.id) %> 
+
+
+
+<h3>Teachers</h3>
+  <% @school.find_teachers.each do |t| %>
+    <p><%= link_to t.name, edit_teacher_path(t.id) %> | <%= t.department.name %></p>
+  <% end %>

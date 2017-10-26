@@ -1,0 +1,10 @@
+<h1>Students</h1>
+
+<% unless @student.first.nil?  %>
+<h2><%= @student.first.school.name %></h2>
+    <% @student.each do |t| %>
+      <p><%= link_to (t.name), edit_school_student_path(:id => t.id) %> | <%= t.form %>  </p>
+    <% end %>
+  <% else %>
+  <h2> This school has no students </h2>
+  <% end %>

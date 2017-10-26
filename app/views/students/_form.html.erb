@@ -1,0 +1,26 @@
+<% if @student.errors.any? %>
+  <h3> Errors </h3>
+  <ul>
+    <% @student.errors.full_messages.each do |message| %>
+      <li> <%= message %> </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for [@school, @student] do |f| %>
+  <p><%= f.label :name %> <%= f.text_field :name %></p>
+  <p><%= f.label :form %> <%= f.text_field :form %></p>
+  <p><%= f.label :Year %> <%= f.select(:year,
+                    options_for_select([
+                                        ["Year 7",7],
+                                        ["Year 8",8],
+                                        ["Year 9",9],
+                                        ["Year 10",10],
+                                        ["Year 11",11],
+                                        ["Year 12",12],
+                                        ["Year 13",13]
+                                        ], @student.year))  %></p>
+  <%= f.hidden_field(:school_id, :value=> @school.id) %>
+  <p><%= f.submit "Submit" %></p>
+
+<% end %>

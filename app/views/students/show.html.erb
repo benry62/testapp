@@ -1,0 +1,8 @@
+<h2>Show</h2>
+
+<p><%= link_to (@student.name), edit_school_student_path(@school.id, @student.id) %></p>
+<p>Form: <%= @student.form %></p>
+<p>Year: <%= @student.year %></p>
+
+
+<%= link_to 'edit', edit_school_student_path(@school.id, @student.id) %> | <%= link_to 'back', school_students_path %>

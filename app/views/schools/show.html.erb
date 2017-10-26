@@ -21,8 +21,8 @@
 <%= link_to 'create new teacher', new_school_teacher_path(@school.id) %>
 
 <h3>Students</h3>
-  <% @students.each do |t| %>
-    <p><%= link_to t.name, edit_school_student_path(@school.id, t.id) %> | Year: <%= t.year %>  | Form: <%= t.form %>  </p>
+  <% @students.each do |s| %>
+    <p><%= link_to((s.fore_name + " " + s.last_name), edit_school_student_path(@school.id, s.id)) %> | Year: <%= s.year %>  | Form: <%= s.form %>  </p>
   <% end %>
 
 

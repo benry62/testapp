@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
 
 
+
   resources :roles
+  resources :detentions
 
   resources :schools do
     resources :departments do

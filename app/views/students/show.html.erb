@@ -1,6 +1,6 @@
 <h2>Show</h2>
 
-<p><%= link_to (@student.name), edit_school_student_path(@school.id, @student.id) %></p>
+<p><%= link_to (@student.fore_name + " " + @student.last_name), edit_school_student_path(@school.id, @student.id) %></p>
 <p>Form: <%= @student.form %></p>
 <p>Year: <%= @student.year %></p>
 

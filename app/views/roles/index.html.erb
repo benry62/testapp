@@ -1,0 +1,7 @@
+<h2> Role</h2>
+
+<% @role.each do |s| %>
+  <p><%= link_to s.name, s %> | <%= link_to "edit", edit_role_path(s.id) %></p>
+<% end %>
+
+<%= link_to "New Role", new_role_path %>

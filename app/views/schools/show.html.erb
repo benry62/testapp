@@ -6,14 +6,16 @@
 
 <h3>Departments</h3>
 <% @departments.each do |d| %>
-  <p><%= d.name %></p>
+  <p><%= link_to d.name, edit_school_department_path(d.school_id, d.id) %></p>
 <% end %>
 
-<%= link_to 'create new department', new_school_department_path(@school.id) %> 
+<%= link_to 'create new department', new_school_department_path(@school.id) %>
 
 
 
 <h3>Teachers</h3>
-  <% @school.find_teachers.each do |t| %>
-    <p><%= link_to t.name, edit_teacher_path(t.id) %> | <%= t.department.name %></p>
-  <% end %>
+<% @teachers.each do |t| %>
+  <p><%= link_to (t.title + " " + t.name), edit_school_teacher_path(@school.id, t.id) %> | <%= t.department.name %> | <%= t.role.name %> </p>
+<% end %>
+
+<%= link_to 'create new teacher', new_school_teacher_path(@school.id) %>

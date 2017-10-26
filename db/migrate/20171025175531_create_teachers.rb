@@ -4,7 +4,7 @@ class CreateTeachers < ActiveRecord::Migration[5.1]
       t.string :name
       t.string :title
       t.integer :department_id
-      t.integer :status_id
+      t.integer :role_id
 
       t.timestamps
     end

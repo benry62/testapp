@@ -1,0 +1,13 @@
+<% if @role.errors.any? %>
+  <h3> Errors </h3>
+  <ul>
+    <% @role.errors.full_messages.each do |message| %>
+      <li> <%= message %> </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for @role do |f| %>
+  <p><%= f.label :name %> <%= f.text_field :name %></p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>

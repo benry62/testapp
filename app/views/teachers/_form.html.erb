@@ -7,10 +7,12 @@
   </ul>
 <% end %>
 
-<%= form_for @teacher do |f| %>
+<%= form_for [@school, @teacher] do |f| %>
   <p><%= f.label :name %> <%= f.text_field :name %></p>
   <p><%= f.label :title %> <%= f.text_field :title %></p>
-  <p><%= f.label :department %> <%= f.collection_select(:department_id, Department.where(school_id: 1), :id, :name, prompt: true ) %></p>
-  <%= f.hidden_field :school_id, :value => 1 %>
+  <p><%= f.label :department %> <%= f.collection_select(:department_id, Department.where(school_id: @school.id), :id, :name, prompt: true ) %></p>
+  <p><%= f.label :role %> <%= f.collection_select(:role_id, Role.all, :id, :name, prompt: true ) %></p>
+  <%= f.hidden_field(:school_id, :value=> @school.id) %>
   <p><%= f.submit "Submit" %></p>
+
 <% end %>

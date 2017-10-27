@@ -1,2 +1,12 @@
-<h1>Detentions#show</h1>
-<p>Find me in app/views/detentions/show.html.erb</p>
+<h2>Detention details</h2>
+
+
+<p><strong>Name: </strong><%= @detention.student.fore_name + " " + @detention.student.last_name %></p>
+<p><strong>Form: </strong><%= @detention.student.form %></p>
+<p><strong>Date set: </strong><%= @detention.date_set.strftime("%a %-d %b %y") %></p>
+<p><strong>Date due: </strong><%= @detention.date_due.strftime("%a %-d %b %y") %></p>
+<p><strong>Duration: </strong><%= @detention.detention_type.name %></p>
+<p><strong>Reason: </strong><%= @detention.reason %></p>
+<p><strong>Set by: </strong><%= @detention.teacher.name %></p>
+
+<%= link_to "edit", edit_school_detention_path %>

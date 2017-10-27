@@ -9,4 +9,9 @@ class Teacher < ApplicationRecord
 
   accepts_nested_attributes_for :department, :school
 
+def full_name
+  "#{title} #{name}"
+end
+
+
 end

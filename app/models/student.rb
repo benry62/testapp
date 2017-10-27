@@ -5,4 +5,9 @@ class Student < ApplicationRecord
   belongs_to :school
   has_many :detentions
 
+
+  def full_name
+    "#{fore_name} #{last_name}"
+  end
+
 end

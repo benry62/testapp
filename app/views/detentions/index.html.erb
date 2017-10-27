@@ -1,2 +1,38 @@
-<h1>Detentions#index</h1>
-<p>Find me in app/views/detentions/index.html.erb</p>
+<h2> Detentions</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Form</th>
+      <th>Date set</th>
+      <th>Date due</th>
+      <th>Type</th>
+      <th>Reason</th>
+      <th>Set By</th>
+    </tr>
+  </thead>
+  <tbody>
+
+
+
+<% @detention.each do |d| %>
+
+<tr>
+  <td></strong><%= link_to (d.student.fore_name + " " + d.student.last_name), edit_school_detention_path(:id =>d.id) %></td>
+<td></strong><%= d.student.form %></td>
+<td></strong><%= d.date_set.strftime("%a %-d %b %y") %></td>
+<td></strong><%= d.date_due.strftime("%a %-d %b %y") %></td>
+<td></strong><%= d.detention_type.name %></td>
+<td></strong><%= d.reason %></td>
+<td></strong><%= d.teacher.title + " " +d.teacher.name %></td>
+</tr>
+
+
+
+<% end %>
+
+
+</table>
+
+<p><%= link_to "New detention", new_school_detention_path %></p>

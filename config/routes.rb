@@ -3,8 +3,10 @@ Rails.application.routes.draw do
 
 
 
+
+
   resources :roles
-  resources :detentions
+  resources :detention_types
 
   resources :schools do
     resources :departments do
@@ -12,6 +14,8 @@ Rails.application.routes.draw do
     resources :teachers do
     end
     resources :students do
+    end
+    resources :detentions do
     end
   end
 

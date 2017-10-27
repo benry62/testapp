@@ -1,0 +1,2 @@
+module DetentionTypesHelper
+end

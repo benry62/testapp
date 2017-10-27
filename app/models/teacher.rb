@@ -5,6 +5,8 @@ class Teacher < ApplicationRecord
   belongs_to :school
   belongs_to :role
 
+  has_many :detentions
+
   accepts_nested_attributes_for :department, :school
 
 end

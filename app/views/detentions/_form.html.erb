@@ -1,0 +1,19 @@
+<% if @detention.errors.any? %>
+  <h3> Errors </h3>
+  <ul>
+    <% @detention.errors.full_messages.each do |message| %>
+      <li> <%= message %> </li>
+    <% end %>
+  </ul>
+<% end %>
+<%= form_for [@school, @detention] do |f| %>
+  <p><%= f.label :detention_type %> <%= f.collection_select(:detention_type_id, DetentionType.all, :id, :name, prompt: true ) %></p>
+  <p><%= f.label :teacher_id %> <%= f.collection_select(:teacher_id, @teachers, :id, :name, prompt: true ) %></p>
+  <p><%= f.label :student_id %> <%= f.collection_select(:student_id, @students, :id, (:fore_name), prompt: true ) %></p>
+  <p><%= f.label :reason %> <%= f.text_field :reason %></p>
+
+  <p><%= f.label :date_set %> <%= f.date_select (:date_set) %></p>
+  <p><%= f.label :date_due %> <%= f.date_select (:date_due) %></p>
+
+  <p><%= f.submit "Submit" %></p>
+<% end %>

@@ -1,0 +1,7 @@
+<h2> Detention Types</h2>
+
+<% @detention_type.each do |s| %>
+  <p><%= link_to s.name, s %> | <%= link_to "edit", edit_detention_type_path(s.id) %></p>
+<% end %>
+
+<%= link_to "New Detention Type", new_detention_type_path %>

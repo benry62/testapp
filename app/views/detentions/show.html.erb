@@ -1,5 +1,13 @@
 <h2>Detention details</h2>
 
+<% if @detention.completed %>
+<fieldset>
+  <p> <strong>Detention completed </strong></p>
+  <p><strong>Date completed: </strong><%= @detention.date_completed.strftime("%a %-d %b %y") %></p>
+</fieldset>
+
+<% end %>
+
 
 <p><strong>Name: </strong><%= @detention.student.fore_name + " " + @detention.student.last_name %></p>
 <p><strong>Form: </strong><%= @detention.student.form %></p>

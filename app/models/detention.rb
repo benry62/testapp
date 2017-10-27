@@ -6,10 +6,15 @@ class Detention < ApplicationRecord
 
 
 
-def find_users
-  @users = User.where(:school_id => @school.id)
-
-end
+  def is_completed(params)
+    if params[:completed]
+      if params[:completed] == "0"
+        params.except[:date_completed]
+      end
+    else
+      params
+    end
+  end
 
 
 end

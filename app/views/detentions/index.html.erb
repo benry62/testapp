@@ -1,6 +1,6 @@
 <h2> Detentions</h2>
 
-<table>
+<table id="detention_table">
   <thead>
     <tr>
       <th>Name</th>
@@ -10,31 +10,28 @@
       <th>Type</th>
       <th>Reason</th>
       <th>Set By</th>
-      <th>Completed</th>
+      <th>Attended</th>
     </tr>
   </thead>
   <tbody>
 
 
-
-<% @detention.each do |d| %>
-
-<tr>
-  <td><%= link_to (d.student.fore_name + " " + d.student.last_name), edit_school_detention_path(:id =>d.id) %></td>
-  <td><%= d.student.form %></td>
-  <td><%= d.date_set.strftime("%a %-d %b %y") %></td>
-  <td><%= d.date_due.strftime("%a %-d %b %y") %></td>
-  <td><%= d.detention_type.name %></td>
-  <td><%= d.reason %></td>
-  <td><%= d.user.title + " " +d.user.name %></td>
-  <td><%= human_boolean(d.completed) %></td>
-</tr>
-
-
-
-<% end %>
-
-
+  <% @detention.each do |d| %>
+      <tr class="<%= cycle('even', 'odd') %><% if d.completed %> completed<% end %>" id="r_<%= d.id %>">
+        <td><%= link_to (d.student.fore_name + " " + d.student.last_name), edit_school_detention_path(:id =>d.id) %></td>
+        <td><%= d.student.form %></td>
+        <td><%= d.date_set.strftime("%a %-d %b %y") %></td>
+        <td><%= d.date_due.strftime("%a %-d %b %y") %></td>
+        <td><%= d.detention_type.name %></td>
+        <td><%= d.reason %></td>
+        <td><%= d.user.title + " " +d.user.name %></td>
+        <td><% if !d.completed %> <%= link_to "attended", edit_school_detention_path(:id => d.id), :class => "link", :id=>"l_#{d.id}", remote: true %><%  end %> </td>
+      </tr>
+  <% end %>
+  </tbody>
 </table>
+
+<%= button_tag 'Show/hide completed', {:id=>"det_show_hide"}%>
+
 
 <p><%= link_to "New detention", new_school_detention_path %></p>

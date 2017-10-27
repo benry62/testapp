@@ -1,0 +1,7 @@
+<h2>Staff member</h2>
+
+<p><%= link_to (@user.title + " " + @user.name), edit_school_user_path(@school.id, @user.id) %></p>
+<p><%= @user.department.name %></p>
+<p><%= @user.role.name %></p>
+
+<%= link_to 'edit', edit_school_user_path(@school.id, @user.id) %> | <%= link_to 'back', school_users_path %>

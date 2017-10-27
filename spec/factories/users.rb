@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :teacher do
+  factory :user do
     name "MyString"
 title "MyString"
 Department_id 1

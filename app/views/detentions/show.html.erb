@@ -7,6 +7,6 @@
 <p><strong>Date due: </strong><%= @detention.date_due.strftime("%a %-d %b %y") %></p>
 <p><strong>Duration: </strong><%= @detention.detention_type.name %></p>
 <p><strong>Reason: </strong><%= @detention.reason %></p>
-<p><strong>Set by: </strong><%= @detention.teacher.name %></p>
+<p><strong>Set by: </strong><%= @detention.user.name %></p>
 
 <%= link_to "edit", edit_school_detention_path %>

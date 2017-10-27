@@ -13,12 +13,12 @@
 
 
 
-<h3>Teachers</h3>
-<% @teachers.each do |t| %>
-  <p><%= link_to (t.title + " " + t.name), edit_school_teacher_path(@school.id, t.id) %> | <%= t.department.name %> | <%= t.role.name %> </p>
+<h3>Staff</h3>
+<% @users.each do |t| %>
+  <p><%= link_to (t.title + " " + t.name), edit_school_user_path(@school.id, t.id) %> | <%= t.department.name %> | <%= t.role.name %> </p>
 <% end %>
 
-<%= link_to 'create new teacher', new_school_teacher_path(@school.id) %>
+<%= link_to 'create new staff', new_school_user_path(@school.id) %>
 
 <h3>Students</h3>
   <% @students.each do |s| %>

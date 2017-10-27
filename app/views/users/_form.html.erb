@@ -1,13 +1,13 @@
-<% if @teacher.errors.any? %>
+<% if @user.errors.any? %>
   <h3> Errors </h3>
   <ul>
-    <% @teacher.errors.full_messages.each do |message| %>
+    <% @user.errors.full_messages.each do |message| %>
       <li> <%= message %> </li>
     <% end %>
   </ul>
 <% end %>
 
-<%= form_for [@school, @teacher] do |f| %>
+<%= form_for [@school, @user] do |f| %>
   <p><%= f.label :name %> <%= f.text_field :name %></p>
   <p><%= f.label :title %> <%= f.text_field :title %></p>
   <p><%= f.label :department %> <%= f.collection_select(:department_id, Department.where(school_id: @school.id), :id, :name, prompt: true ) %></p>

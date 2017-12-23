@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery-ui/effects/effect-blind
+//= require jquery-ui
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree
@@ -51,6 +52,7 @@ $(document).on('turbolinks:load', function() {
       $( "#det_show_hide" ).click(function() {
         $("#detention_table .completed").toggle(400);
       });
+
 
 
 

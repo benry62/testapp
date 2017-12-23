@@ -16,5 +16,15 @@ class Detention < ApplicationRecord
     end
   end
 
+  def student_name
+    student.try(:last_name)
+  end
+
+  def student_name=(name)
+    self.category = Student.find_by(last_name: name) if name.present?
+  end
+
+
+
 
 end

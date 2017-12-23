@@ -22,6 +22,6 @@
                                         ["Year 13",13]
                                         ], @student.year))  %></p>
   <%= f.hidden_field(:school_id, :value=> @school.id) %>
-  <p><%= f.submit "Submit" %></p>
+  <p><%= f.submit "Submit", :id=>"student_submit"%></p>
 
 <% end %>

@@ -2,7 +2,7 @@
 
 $(document).on('turbolinks:load', function() {
 
-  $("#new_student").hide()
+  $("#new_student_form").hide()
 
 
   $( "#detention_student_name" ).autocomplete({
@@ -16,23 +16,22 @@ $(document).on('turbolinks:load', function() {
     });
 
   $("#new_student_link").click(function (){
-    $("#new_student").toggle()
+    $("#new_student_form").toggle()
     return false;
   })
 
 
-
   $("#new_student").submit(function (event){
-      alert('the action is: ' + $("#new_student").attr('action'));
-  //    $.ajax(
-  //      url: url,
-  //      type: 'POST',
-  //      dataType: 'script',
-  //      function(data, status){
-  //       alert("Data: " + data + "\nStatus: " + status);
-  //    });
-      return false
+    $("#new_student").post(
+      $(this).attr('action'),
+      function (data, status){
+      alert("Data: " + data + "\nStatus: " + status);
+    })
+  return false;
   });
+
+
+
 
 
 

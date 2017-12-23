@@ -11,7 +11,9 @@
   <p><%= f.label :detention_type %> <%= f.collection_select(:detention_type_id, DetentionType.all, :id, :name, prompt: false ) %></p>
   <p><%= f.label :user_id, "Staff"%> <%= f.collection_select(:user_id, @users, :id, :full_name, prompt: true ) %></p>
   <p><%= f.label :student_name %> <%= f.text_field :student_name, data: { autocomplete_source: school_students_path} %></p>
-  <p><%= link_to "New student", new_school_student_path, id:"new_student_link"%></p>
+  <% if @student %>
+    <p><%= link_to "New student", new_school_student_path, id:"new_student_link"%></p>
+  <% end %>
   <p><%= f.label :reason %> <%= f.text_field :reason %></p>
   <p><%= f.label :date_set %> <%= f.date_select :date_set, {order: [:day, :month, :year]} %></p>
   <p><%= f.label :date_due %> <%= f.date_select :date_due, {default: 1.day.from_now, order: [:day, :month, :year]} %></p>
@@ -32,6 +34,25 @@
 
 <% end %>
 
-<div id="new_student">
-  <%= render :partial => '/students/form', :local => { :school => @school, @student => Student.new} %>
+<% if @student %>
+<div id="new_student_form">
+  <%= form_with(model: [@school, @student], id: "new_student") do |f| %>
+    <p><%= f.label :first_name %> <%= f.text_field :fore_name %></p>
+    <p><%= f.label :last_name %> <%= f.text_field :last_name %></p>
+    <p><%= f.label :form %> <%= f.text_field :form %></p>
+    <p><%= f.label :Year %> <%= f.select(:year,
+                      options_for_select([
+                                          ["Year 7",7],
+                                          ["Year 8",8],
+                                          ["Year 9",9],
+                                          ["Year 10",10],
+                                          ["Year 11",11],
+                                          ["Year 12",12],
+                                          ["Year 13",13]
+                                          ], @student.year))  %></p>
+    <%= f.hidden_field(:school_id, :value=> @school.id) %>
+    <p><%= f.submit "Submit", :id=>"student_submit"%></p>
+
+  <% end %>
 </div>
+<% end %>

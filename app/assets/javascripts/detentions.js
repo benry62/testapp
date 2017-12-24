@@ -18,16 +18,6 @@ $(document).on('turbolinks:load', function() {
   $("#new_student_link").click(function (){
     $("#new_student_form").toggle()
     return false;
-  })
-
-
-  $("#new_student").submit(function (event){
-    $("#new_student").post(
-      $(this).attr('action'),
-      function (data, status){
-      alert("Data: " + data + "\nStatus: " + status);
-    })
-  return false;
   });
 
 
@@ -35,4 +25,7 @@ $(document).on('turbolinks:load', function() {
 
 
 
-});
+
+
+
+}); // end of main wrapper

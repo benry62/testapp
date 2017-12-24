@@ -54,6 +54,18 @@ $(document).on('turbolinks:load', function() {
       });
 
 
-
+      $("#student_submit").click(function(){
+        var valuesToSubmit = $("#new_student").serialize();
+        $.ajax({
+          type: 'POST',
+          url: $("#new_student").attr('action'),
+          dataType: 'json',
+          data: valuesToSubmit,
+          success: function(data, textStatus, jqXHR) {
+            alert("success");
+          }
+      });
+      return false;
+    });
 
 });

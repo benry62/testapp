@@ -20,6 +20,25 @@ $(document).on('turbolinks:load', function() {
     return false;
   });
 
+  $("#student_submit").click(function(){
+    var valuesToSubmit = $("#new_student").serialize();
+    $.ajax({
+        type: 'POST',
+        url: $("#new_student").attr('action'),
+        dataType: 'json',
+        data: valuesToSubmit,
+        success: function(data, textStatus, jqXHR) {
+          // write students name in text field
+          $("#detention_student_name").val(data.fore_name + " " + data.last_name)
+          // write student id to hidden values
+          $("#detention_student_id").val(''+data.id)
+        //  var returned_values = JSON.parse(data);
+        //  alert (returned_values.last_name);
+
+        }
+    });
+    return false;
+  });
 
 
 

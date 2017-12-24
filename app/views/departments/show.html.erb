@@ -1,3 +1,21 @@
-<h1>Department</h1>
+<h1><%= link_to @department.name, edit_school_department_path  %></h1>
 
-<%= link_to @department.name, edit_school_department_path  %> 
+
+<h3>Staff</h3>
+<table id="Staff_table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+
+<% @users.each do |t| %>
+  <tr><td><%=  link_to (t.title + " " + t.name), edit_school_user_path(@school.id) %> </td><td>  <%= t.role.name %> </td></tr>
+<% end %>
+</tbody>
+</table>
+
+
+<p><%= link_to 'create new staff', new_school_user_path(@school.id) %></p>

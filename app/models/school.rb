@@ -6,6 +6,8 @@ class School < ApplicationRecord
   has_many :detentions
   has_many :users
   has_many :students
+  has_many :forms
+
   accepts_nested_attributes_for :departments, :users
 
 

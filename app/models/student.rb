@@ -5,6 +5,7 @@ class Student < ApplicationRecord
   validates :last_name, :uniqueness => { :scope => :fore_name }
 
   belongs_to :school
+  belongs_to :form
   has_many :detentions
 
 

@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
 
 
+
+
   resources :roles
   resources :detention_types
 
@@ -16,6 +18,8 @@ Rails.application.routes.draw do
     resources :students do
     end
     resources :detentions do
+    end
+    resources :forms do
     end
   end
 

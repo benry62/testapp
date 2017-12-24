@@ -1,0 +1,18 @@
+<% if @form.errors.any? %>
+  <h3> Errors </h3>
+  <ul>
+    <% @form.errors.full_messages.each do |message| %>
+      <li> <%= message %> </li>
+    <% end %>
+  </ul>
+<% end %>
+
+
+<%= form_for [@school, @form] do |f| %>
+
+<p><%= f.label :name %> <%= f.text_field :name %></p>
+<p><%= f.label :year %> <%= f.text_field :year %></p>
+  <p><%= f.submit "submit" %>
+  <p><%= f.hidden_field(:school_id, :value=> @school.id) %> </p>
+
+<% end %>

@@ -1,0 +1,4 @@
+<h2> Forms</h2>
+<% @forms.each do |d| %>
+  <p><%= link_to d.name, school_form_path(id: d.id) %> | <%= d.year %> | </p>
+<% end %>

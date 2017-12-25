@@ -40,6 +40,11 @@ $(document).on('turbolinks:load', function() {
     return false;
   });
 
+  $('#year_selector').change(function(){
+    alert("woo")
+
+  });
+
 
 
 

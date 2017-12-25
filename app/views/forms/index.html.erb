@@ -1,4 +1,18 @@
 <h2> Forms</h2>
-<% @forms.each do |d| %>
-  <p><%= link_to d.name, school_form_path(id: d.id) %> | <%= d.year %> | </p>
+
+<table id="Form_table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Year</th>
+    </tr>
+  </thead>
+  <tbody>
+
+<% @forms.each do |t| %>
+  <tr><td><%= link_to (t.name), school_form_path(@school.id, t.id) %> </td><td>  <%= t.year %> </td></tr>
 <% end %>
+</tbody>
+</table>
+
+<p><%= link_to 'create new form', new_school_form_path(@school.id) %></p>

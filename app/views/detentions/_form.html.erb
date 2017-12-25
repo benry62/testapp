@@ -39,7 +39,6 @@
   <%= form_with(model: [@school, @student], id: "new_student") do |f| %>
     <p><%= f.label :first_name %> <%= f.text_field :fore_name %></p>
     <p><%= f.label :last_name %> <%= f.text_field :last_name %></p>
-    <p><%= f.label :form %> <%= f.text_field :form %></p>
     <p><%= f.label :Year %> <%= f.select(:year,
                       options_for_select([
                                           ["Year 7",7],
@@ -49,7 +48,8 @@
                                           ["Year 11",11],
                                           ["Year 12",12],
                                           ["Year 13",13]
-                                          ], @student.year))  %></p>
+                                          ], @student.year),{},{:id=>"year_selector"})  %></p>
+    <p><%= f.label :form_id %> <%= f.collection_select(:form_id, Form.where(school_id: @school.id).order({year: :asc, name: :asc}), :id, :name, prompt: false ) %></p>
     <%= f.hidden_field(:school_id, :value=> @school.id) %>
     <p><%= f.submit "Submit", :id=>"student_submit"%></p>
 

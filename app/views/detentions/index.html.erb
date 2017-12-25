@@ -19,7 +19,7 @@
   <% @detention.each do |d| %>
       <tr class="<%= cycle('even', 'odd') %><% if d.completed %> completed<% end %>" id="r_<%= d.id %>">
         <td><%= link_to (d.student.fore_name + " " + d.student.last_name), edit_school_detention_path(:id =>d.id) %></td>
-        <td><%= d.student.form %></td>
+        <td><%= d.student.form.name %></td>
         <td><%= d.date_set.strftime("%a %-d %b %y") %></td>
         <td><%= d.date_due.strftime("%a %-d %b %y") %></td>
         <td><%= d.detention_type.name %></td>

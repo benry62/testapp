@@ -11,7 +11,16 @@
 <%= form_for [@school, @form] do |f| %>
 
 <p><%= f.label :name %> <%= f.text_field :name %></p>
-<p><%= f.label :year %> <%= f.text_field :year %></p>
+<p><%= f.label :year %> <%= f.select(:year,
+                  options_for_select([
+                                      ["Year 7",7],
+                                      ["Year 8",8],
+                                      ["Year 9",9],
+                                      ["Year 10",10],
+                                      ["Year 11",11],
+                                      ["Year 12",12],
+                                      ["Year 13",13]
+                                      ]))  %></p>
   <p><%= f.submit "submit" %>
   <p><%= f.hidden_field(:school_id, :value=> @school.id) %> </p>
 

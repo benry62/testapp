@@ -23,7 +23,7 @@
                                         ], @student.year))  %></p>
         <%= f.hidden_field(:school_id, :value=> @school.id) %>
         <%= f.grouped_collection_select :form_id,
-          Form.grouped_by_year(:year, @school.id),
+          Form.where("school_id", @school.id),
           :year, :name,
           :id, :name
         %>

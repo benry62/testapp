@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
 
 
+
   resources :roles
+  resources :forms
   resources :detention_types
 
   resources :schools do
@@ -19,7 +21,7 @@ Rails.application.routes.draw do
     end
     resources :detentions do
     end
-    resources :forms do
+    resources :years do
     end
   end
 

@@ -10,7 +10,7 @@
 <%= form_for [@school, @student] do |f| %>
   <p><%= f.label :first_name %> <%= f.text_field :fore_name %></p>
   <p><%= f.label :last_name %> <%= f.text_field :last_name %></p>
-  <p><%= f.label :form_id %> <%= f.collection_select(:form_id, Form.where(school_id: @school.id).order({year: :asc, name: :asc}), :id, :name, prompt: false ) %></p>  
+  <p><%= f.label :form_id %> <%= f.collection_select(:form_id, Form.where(school_id: @school.id).order({year: :asc, name: :asc}), :id, :name, prompt: false ) %></p>
   <p><%= f.label :Year %> <%= f.select(:year,
                     options_for_select([
                                         ["Year 7",7],
@@ -22,6 +22,14 @@
                                         ["Year 13",13]
                                         ], @student.year))  %></p>
         <%= f.hidden_field(:school_id, :value=> @school.id) %>
+        <%= f.grouped_collection_select :form_id,
+          Form.grouped_by_year(:year, @school.id),
+          :year, :name,
+          :id, :name
+        %>
+
+
+
   <p><%= f.submit "Submit"%></p>
 
 <% end %>

@@ -1,7 +1,7 @@
 <h1><%= @school.name %></h1>
 
 <p></p>
-<%= link_to 'edit', edit_school_path %>  
+<%= link_to 'edit', edit_school_path %>
 
 
 <h3>Departments</h3>
@@ -55,7 +55,7 @@
 
 
   <% @students.each do |s| %>
-    <tr><td><%= link_to((s.fore_name + " " + s.last_name), school_student_path(@school.id, s.id)) %> </td><td> <%= s.year %>  </td><td>  <%= s.form %>  </td></tr>
+    <tr><td><%= link_to((s.fore_name + " " + s.last_name), school_student_path(@school.id, s.id)) %> </td><td> <%= s.form.year.name %>  </td><td>  <%= s.form.name %>  </td></tr>
   <% end %>
 </tbody>
 </table>

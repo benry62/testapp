@@ -32,6 +32,8 @@ $(document).on('turbolinks:load', function() {
           $("#detention_student_name").val(data.fore_name + " " + data.last_name)
           // write student id to hidden values
           $("#detention_student_id").val(''+data.id)
+          $("#new_student_form").fadeOut()
+          $("#flash").effect("highlight", {}, 1500);;
         //  var returned_values = JSON.parse(data);
         //  alert (returned_values.last_name);
 

@@ -8,7 +8,7 @@ class School < ApplicationRecord
   has_many :students
   has_many :years
 
-  accepts_nested_attributes_for :departments, :users
+  accepts_nested_attributes_for :departments, :users, :years
 
 
 

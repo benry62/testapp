@@ -10,7 +10,7 @@
 <%= form_for [@school, @detention] do |f| %>
   <p><%= f.label :detention_type %> <%= f.collection_select(:detention_type_id, DetentionType.all, :id, :name, prompt: false ) %></p>
   <p><%= f.label :user_id, "Staff"%> <%= f.collection_select(:user_id, @users, :id, :full_name, prompt: true ) %></p>
-  <p><%= f.label :student_name %> <%= f.text_field :student_name, data: { autocomplete_source: school_students_path} %></p>
+  <p id="flash"><%= f.label :student_name %> <%= f.text_field :student_name, data: { autocomplete_source: school_students_path} %></p>
   <% if @student %>
     <p><%= link_to "New student", new_school_student_path, id:"new_student_link"%></p>
   <% end %>
@@ -39,17 +39,7 @@
   <%= form_with(model: [@school, @student], id: "new_student") do |f| %>
     <p><%= f.label :first_name %> <%= f.text_field :fore_name %></p>
     <p><%= f.label :last_name %> <%= f.text_field :last_name %></p>
-    <p><%= f.label :Year %> <%= f.select(:year,
-                      options_for_select([
-                                          ["Year 7",7],
-                                          ["Year 8",8],
-                                          ["Year 9",9],
-                                          ["Year 10",10],
-                                          ["Year 11",11],
-                                          ["Year 12",12],
-                                          ["Year 13",13]
-                                          ], @student.year),{},{:id=>"year_selector"})  %></p>
-    <p><%= f.label :form_id %> <%= f.collection_select(:form_id, Form.where(school_id: @school.id).order({year: :asc, name: :asc}), :id, :name, prompt: false ) %></p>
+    <p><%= f.label :form_id %> <%= f.collection_select(:form_id, Form.where(school_id: @school.id).order({name: :asc}), :id, :name, prompt: true ) %></p>
     <%= f.hidden_field(:school_id, :value=> @school.id) %>
     <p><%= f.submit "Submit", :id=>"student_submit"%></p>
 

@@ -24,6 +24,9 @@ class Detention < ApplicationRecord
     self.category = Student.find_by(last_name: name) if name.present?
   end
 
+  def not_weekend
+    1.day.from_now.on_weekday? ? 1.day.from_now : Date.today + ((1 - Date.today.wday) % 7)
+  end
 
 
 

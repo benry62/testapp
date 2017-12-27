@@ -16,7 +16,7 @@
   <% end %>
   <p><%= f.label :reason %> <%= f.text_field :reason %></p>
   <p><%= f.label :date_set %> <%= f.date_select :date_set, {order: [:day, :month, :year]} %></p>
-  <p><%= f.label :date_due %> <%= f.date_select :date_due, {default: 1.day.from_now, order: [:day, :month, :year]} %></p>
+  <p><%= f.label :date_due %> <%= f.date_select :date_due, {default: @detention.not_weekend , order: [:day, :month, :year]} %></p>
   <fieldset>
   <p><%= f.label :completed %> <%= f.check_box :completed %></p>
   <p><%= f.label :date_completed %> <%= f.date_select :date_completed, order: [:day, :month, :year] %></p>

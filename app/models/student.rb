@@ -13,4 +13,6 @@ class Student < ApplicationRecord
     "#{fore_name} #{last_name}"
   end
 
+  
+
 end

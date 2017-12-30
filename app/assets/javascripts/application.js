@@ -41,8 +41,10 @@ $(document).on('turbolinks:load', function() {
           data: send_data,
           success: function(){
             $("#r_"+link_id).addClass("completed");
+            $("#q_"+link_id).addClass("completed");
             $("#detention_table .completed").hide();
             $("#l_"+link_id).remove();
+            $("#m_"+link_id).remove();
             return false;
           }
         });

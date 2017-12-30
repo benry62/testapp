@@ -14,10 +14,25 @@
     </tr>
   </thead>
   <tbody>
+    <tr ><td colspan="8" style="text-align: center">My detentions</td></tr>
+    <% @my_detentions.each do |d| %>
+        <tr class="<%= cycle('odd', 'even') %><% if d.completed %> completed<% end %>" id="q_<%= d.id %>">
+          <td><%= link_to (d.student.fore_name + " " + d.student.last_name), edit_detention_path(:id =>d.id) %></td>
+          <td><%= d.student.form.name %></td>
+          <td><%= d.date_set.strftime("%a %-d %b %y") %></td>
+          <td><%= d.date_due.strftime("%a %-d %b %y") %></td>
+          <td><%= d.d_type.humanize %></td>
+          <td><%= d.reason %></td>
+          <td><%= d.user.name %></td>
+          <td><% if !d.completed %> <%= link_to "attended", edit_detention_path(:id => d.id), :class => "link", :id=>"m_#{d.id}", remote: true %><%  end %> </td>
+        </tr>
+    <% end %>
+    <tr ><td colspan="8" style="text-align: center">&nbsp;</td></tr>
+    <tr ><td colspan="8" style="text-align: center">All detentions</td></tr>
 
 
   <% @detentions.each do |d| %>
-      <tr class="<%= cycle('even', 'odd') %><% if d.completed %> completed<% end %>" id="r_<%= d.id %>">
+      <tr class="<%= cycle('odd', 'even') %><% if d.completed %> completed<% end %>" id="r_<%= d.id %>">
         <td><%= link_to (d.student.fore_name + " " + d.student.last_name), edit_detention_path(:id =>d.id) %></td>
         <td><%= d.student.form.name %></td>
         <td><%= d.date_set.strftime("%a %-d %b %y") %></td>

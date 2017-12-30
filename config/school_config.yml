@@ -1,0 +1,8 @@
+name:
+  "Chelmer Valley High School"
+
+detention_types:
+  15_min: 15
+  25_min: 25
+  lunch_time: 30
+  after_school: 60

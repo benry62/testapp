@@ -1,7 +1,7 @@
-<h1>Teachers</h1>
+<h1><%= school_name %></h1>
 
 <% unless @user.first.nil?  %>
-<h2><%= @user.first.name %></h2>
+<h2>Teachers</h2>
     <% @user.each do |t| %>
       <p><%= link_to  t.name, edit_user_path(:id => t.id) %> | <%= t.department.name %> | <%= t.role.name %> </p>
     <% end %>

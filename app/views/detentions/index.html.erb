@@ -22,7 +22,7 @@
         <td><%= d.student.form.name %></td>
         <td><%= d.date_set.strftime("%a %-d %b %y") %></td>
         <td><%= d.date_due.strftime("%a %-d %b %y") %></td>
-        <td><%= d.d_type %></td>
+        <td><%= d.d_type.humanize %></td>
         <td><%= d.reason %></td>
         <td><%= d.user.name %></td>
         <td><% if !d.completed %> <%= link_to "attended", edit_detention_path(:id => d.id), :class => "link", :id=>"l_#{d.id}", remote: true %><%  end %> </td>

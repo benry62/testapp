@@ -10,10 +10,10 @@
 
 
 <p><strong>Name: </strong><%= @detention.student.fore_name + " " + @detention.student.last_name %></p>
-<p><strong>Form: </strong><%= @detention.student.form %></p>
+<p><strong>Form: </strong><%= @detention.student.form.name %></p>
 <p><strong>Date set: </strong><%= @detention.date_set.strftime("%a %-d %b %y") %></p>
 <p><strong>Date due: </strong><%= @detention.date_due.strftime("%a %-d %b %y") %></p>
-<p><strong>Duration: </strong><%= @detention.detention_type %></p>
+<p><strong>Duration: </strong><%= @detention.d_type %></p>
 <p><strong>Reason: </strong><%= @detention.reason %></p>
 <p><strong>Set by: </strong><%= @detention.user.name %></p>
 

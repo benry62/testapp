@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
 
-
-
-  devise_for :users
   root to: "detentions#index"
+
+
+  #devise_for :users
+  devise_for :users, :controllers => { registrations: 'registrations' }
   resources :roles
   resources :forms
   resources :departments

@@ -18,7 +18,7 @@
   </thead>
   <tbody>
 <% @user.detentions.each do |d| %>
-  <tr class="<%= cycle('even', 'odd') %>"><td><%= d.student.full_name%></td><td><%= d.date_due.strftime("%a %-d %b %y") %></td><td><%= d.reason %></td><td><%= d.detention_type %></td><td><%= d.completed %></td></tr>
+  <tr class="<%= cycle('even', 'odd') %>"><td><%= d.student.full_name%></td><td><%= d.date_due.strftime("%a %-d %b %y") %></td><td><%= d.reason %></td><td><%= d.d_type.humanize %></td><td><%= d.completed %></td></tr>
 <% end %>
   </tbody>
 </table>

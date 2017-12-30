@@ -12,9 +12,6 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :department
 
-def full_name
-  "#{name}"
-end
 
 
 end

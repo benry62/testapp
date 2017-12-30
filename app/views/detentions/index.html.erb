@@ -24,7 +24,7 @@
         <td><%= d.date_due.strftime("%a %-d %b %y") %></td>
         <td><%= d.detention_type.name %></td>
         <td><%= d.reason %></td>
-        <td><%= d.user.title + " " +d.user.name %></td>
+        <td><%= d.user.name %></td>
         <td><% if !d.completed %> <%= link_to "attended", edit_school_detention_path(:id => d.id), :class => "link", :id=>"l_#{d.id}", remote: true %><%  end %> </td>
       </tr>
   <% end %>

@@ -35,7 +35,7 @@
   <tbody>
 
 <% @users.each do |t| %>
-  <tr><td><%= link_to (t.title + " " + t.name), school_user_path(@school.id, t.id) %> </td><td> <%= t.department.name %> </td><td>  <%= t.role.name %> </td></tr>
+  <tr><td><%= link_to t.name, school_user_path(@school.id, t.id) %> </td><td> <%= t.department.name %> </td><td>  <%= t.role.name %> </td></tr>
 <% end %>
 </tbody>
 </table>

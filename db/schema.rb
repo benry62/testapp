@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171230014548) do
+ActiveRecord::Schema.define(version: 20171230122841) do
 
   create_table "departments", force: :cascade do |t|
     t.text "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "school_id"
   end
 
   create_table "detention_types", force: :cascade do |t|
@@ -36,14 +35,12 @@ ActiveRecord::Schema.define(version: 20171230014548) do
     t.boolean "completed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "school_id"
     t.datetime "date_completed"
   end
 
   create_table "forms", force: :cascade do |t|
     t.string "name"
     t.integer "year_id"
-    t.integer "school_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -54,15 +51,8 @@ ActiveRecord::Schema.define(version: 20171230014548) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "schools", force: :cascade do |t|
-    t.text "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "students", force: :cascade do |t|
     t.string "last_name"
-    t.string "school_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "fore_name"
@@ -75,7 +65,6 @@ ActiveRecord::Schema.define(version: 20171230014548) do
     t.integer "role_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "school_id"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -101,7 +90,6 @@ ActiveRecord::Schema.define(version: 20171230014548) do
 
   create_table "years", force: :cascade do |t|
     t.string "name"
-    t.integer "school_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,11 +1,9 @@
 class Department < ApplicationRecord
   validates :name, presence: true
-  validates :name, uniqueness:  {scope: :school_id, message: "of Department must be unique"}
+  validates :name, uniqueness:  true
 
-  belongs_to :school
   has_many :users
   accepts_nested_attributes_for :users
-  accepts_nested_attributes_for :school
 
 
 

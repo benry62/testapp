@@ -2,7 +2,7 @@
 
 <p><%= @user.department.name %> | <%= @user.role.name %></p>
 
-<%= link_to 'edit', edit_school_user_path(@school.id, @user.id) %> | <%= link_to 'back', school_users_path %>
+<%= link_to 'edit', edit_user_path(@user.id) %> | <%= link_to 'back', users_path %>
 
 
 <h3>Detentions</h3>

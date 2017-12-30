@@ -1,7 +1,7 @@
 <h2> Years</h2>
 <% @year.each do |d| %>
-  <p><%=  d.name %> |  <%= link_to "edit", edit_school_year_path(id: d.id) %> </p>
+  <p><%=  d.name %> |  <%= link_to "edit", edit_year_path(id: d.id) %> </p>
 <% end %>
 
 
-<p><%= link_to "Create new year", new_school_year_path %></p>
+<p><%= link_to "Create new year", new_year_path %></p>

@@ -2,7 +2,6 @@
 
 
 <% unless @student.first.nil?  %>
-<h2><%= @student.first.school.name %></h2>
 <table id="students_table">
   <thead>
     <tr>
@@ -12,10 +11,10 @@
   </thead>
   <tbody>
 
-    
+
     <% @student.each do |t| %>
       <tr class="<%= cycle('even', 'odd') %>">
-        <td><%= link_to (t.fore_name + " " + t.last_name), edit_school_student_path(:id => t.id) %> </td><td> <%= t.form.name %>  </td>
+        <td><%= link_to (t.fore_name + " " + t.last_name), edit_student_path(:id => t.id) %> </td><td> <%= t.form.name %>  </td>
       </tr>
     <% end %>
 </tbody>
@@ -25,4 +24,4 @@
   <h2> This school has no students </h2>
   <% end %>
 
-  <p><%= link_to "New student", new_school_student_path %></p>
+  <p><%= link_to "New student", new_student_path %></p>

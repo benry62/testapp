@@ -7,16 +7,9 @@
   </ul>
 <% end %>
 
-<%= form_for [@school, @student] do |f| %>
+<%= form_for [@student] do |f| %>
   <p><%= f.label :first_name %> <%= f.text_field :fore_name %></p>
   <p><%= f.label :last_name %> <%= f.text_field :last_name %></p>
-  <p><%= f.label :form_id %> <%= f.collection_select(:form_id, Form.where(school_id: @school.id).order({name: :asc}), :id, :name, prompt: false ) %></p>
-
-        <%= f.hidden_field(:school_id, :value=> @school.id) %>
-
-
-
-
+  <p><%= f.label :form_id %> <%= f.collection_select(:form_id, Form.all.order({name: :asc}), :id, :name, prompt: false ) %></p>
   <p><%= f.submit "Submit"%></p>
-
 <% end %>

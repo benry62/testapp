@@ -1,4 +1,4 @@
-<h1><%= link_to @department.name, edit_school_department_path  %></h1>
+<h1><%= link_to @department.name, edit_department_path  %></h1>
 
 
 <h3>Staff</h3>
@@ -12,10 +12,10 @@
   <tbody>
 
 <% @users.each do |t| %>
-  <tr><td><%=  link_to t.name, edit_school_user_path(@school.id) %> </td><td>  <%= t.role.name %> </td></tr>
+  <tr><td><%=  link_to t.name, edit_user_path %> </td><td>  <%= t.role.name %> </td></tr>
 <% end %>
 </tbody>
 </table>
 
 
-<p><%= link_to 'create new staff', new_school_user_path(@school.id) %></p>
+<p><%= link_to 'create new staff', new_user_path %></p>

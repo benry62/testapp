@@ -1,9 +1,9 @@
 <h1>Teachers</h1>
 
 <% unless @user.first.nil?  %>
-<h2><%= @user.first.school.name %></h2>
+<h2><%= @user.first.name %></h2>
     <% @user.each do |t| %>
-      <p><%= link_to  t.name, edit_school_user_path(:id => t.id) %> | <%= t.department.name %> | <%= t.role.name %> </p>
+      <p><%= link_to  t.name, edit_user_path(:id => t.id) %> | <%= t.department.name %> | <%= t.role.name %> </p>
     <% end %>
   <% else %>
   <h2> This school has no staff </h2>

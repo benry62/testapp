@@ -1,7 +1,7 @@
 <h2><%= @student.fore_name + " " + @student.last_name %></h2>
 
 <p><strong>Form: </strong><%= @student.form.name %> | <strong>Year: </strong><%= @student.form.year.name %></p>
-<%= link_to 'edit', edit_school_student_path(@school.id, @student.id) %> | <%= link_to 'back', school_students_path %>
+<%= link_to 'edit', edit_student_path(@student.id) %> | <%= link_to 'back', students_path %>
 
 
 <h3>Detentions</h3>

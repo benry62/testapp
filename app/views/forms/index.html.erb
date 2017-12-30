@@ -10,9 +10,9 @@
   <tbody>
 
 <% @forms.each do |t| %>
-  <tr><td><%= link_to (t.name), school_form_path(@school.id, t.id) %> </td><td>  <%= t.year %> </td></tr>
+  <tr><td><%= link_to (t.name), form_path(t.id) %> </td><td>  <%= t.year.name %> </td></tr>
 <% end %>
 </tbody>
 </table>
 
-<p><%= link_to 'create new form', new_school_form_path(@school.id) %></p>
+<p><%= link_to 'create new form', new_form_path %></p>

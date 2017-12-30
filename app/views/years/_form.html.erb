@@ -6,7 +6,7 @@
     <% end %>
   </ul>
 <% end %>
-<%= form_for [@school, @year] do |f| %>
+<%= form_for [@year] do |f| %>
   <p><%= f.label :name %> <%= f.text_field :name %></p>
   <p><%= f.submit "Submit" %></p>
 <% end %>

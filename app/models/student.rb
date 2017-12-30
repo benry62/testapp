@@ -4,7 +4,6 @@ class Student < ApplicationRecord
   validates :fore_name, :uniqueness => { :scope => :last_name }
   validates :last_name, :uniqueness => { :scope => :fore_name }
 
-  belongs_to :school
   belongs_to :form
   has_many :detentions
 
@@ -13,6 +12,6 @@ class Student < ApplicationRecord
     "#{fore_name} #{last_name}"
   end
 
-  
+
 
 end

@@ -13,7 +13,7 @@
 <p><strong>Form: </strong><%= @detention.student.form %></p>
 <p><strong>Date set: </strong><%= @detention.date_set.strftime("%a %-d %b %y") %></p>
 <p><strong>Date due: </strong><%= @detention.date_due.strftime("%a %-d %b %y") %></p>
-<p><strong>Duration: </strong><%= @detention.detention_type.name %></p>
+<p><strong>Duration: </strong><%= @detention.detention_type %></p>
 <p><strong>Reason: </strong><%= @detention.reason %></p>
 <p><strong>Set by: </strong><%= @detention.user.name %></p>
 

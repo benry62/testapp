@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   root to: "detentions#index"
   resources :roles
   resources :forms
-  resources :detention_types
   resources :departments
   resources :users
   resources :students

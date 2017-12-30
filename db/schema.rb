@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171230122841) do
+ActiveRecord::Schema.define(version: 20171230154253) do
 
   create_table "departments", force: :cascade do |t|
     t.text "name"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20171230122841) do
   end
 
   create_table "detentions", force: :cascade do |t|
-    t.integer "detention_type_id"
+    t.string "d_type"
     t.integer "student_id"
     t.integer "user_id"
     t.datetime "date_set"

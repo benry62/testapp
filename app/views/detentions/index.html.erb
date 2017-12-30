@@ -16,13 +16,13 @@
   <tbody>
 
 
-  <% @detention.each do |d| %>
+  <% @detentions.each do |d| %>
       <tr class="<%= cycle('even', 'odd') %><% if d.completed %> completed<% end %>" id="r_<%= d.id %>">
         <td><%= link_to (d.student.fore_name + " " + d.student.last_name), edit_detention_path(:id =>d.id) %></td>
         <td><%= d.student.form.name %></td>
         <td><%= d.date_set.strftime("%a %-d %b %y") %></td>
         <td><%= d.date_due.strftime("%a %-d %b %y") %></td>
-        <td><%= d.detention_type.name %></td>
+        <td><%= d.d_type %></td>
         <td><%= d.reason %></td>
         <td><%= d.user.name %></td>
         <td><% if !d.completed %> <%= link_to "attended", edit_detention_path(:id => d.id), :class => "link", :id=>"l_#{d.id}", remote: true %><%  end %> </td>

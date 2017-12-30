@@ -9,6 +9,9 @@ module ApplicationHelper
     f["name"]
   end
 
-
+  def d_types
+    f = YAML.load_file("config/school_config.yml")
+    f["detention_types"]
+  end
 
 end

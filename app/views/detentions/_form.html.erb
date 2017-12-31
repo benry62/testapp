@@ -65,30 +65,33 @@
   </div>
 
   <% if f.object.persisted?() %>
-  <div class="jumbotron">
-    <h2>Update detention</h2>
-    <div class="form-group row">
-      <%= f.label :completed, :class => "col-sm-2 col-form-label" %>
-      <div class="col-sm-5">
-        <%= f.check_box :completed %>
+    <div class="jumbotron">
+      <h2>Update detention</h2>
+      <div class="form-group row">
+        <%= f.label :completed, :class => "col-sm-2 col-form-label" %>
+        <div class="col-sm-5">
+          <%= f.check_box :completed %>
+        </div>
       </div>
-    </div>
 
-    <%= link_to 'Delete this detention', detention_path, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <div class="form-group row">
+        <%= f.label :date_completed, :class => "col-sm-2 col-form-label" %>
+        <div class="col-sm-5">
+          <%= f.date_select :date_completed, order: [:day, :month, :year] %>
+        </div>
+      </div>
+
+      <%= link_to 'Delete this detention', detention_path, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <p> rollover, update, delete </p>
 
     <%  end %>
 
-    <div class="form-group row">
-      <%= f.label :date_completed, :class => "col-sm-2 col-form-label" %>
-      <div class="col-sm-5">
-        <%= f.date_select :date_completed, order: [:day, :month, :year] %>
-      </div>
-    </div>
+  </div>
+
 
   <%= f.hidden_field :student_id%>
 
   <p><%= f.submit "Set detention" %></p>
-</div>
 
 
 

@@ -14,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ><td colspan="8" style="text-align: center">My detentions</td></tr>
+    <tr><td colspan="8" style="text-align: center"><h4>My detentions</h4></td></tr>
     <% @my_detentions.each do |d| %>
         <tr class="<%= cycle('odd', 'even') %><% if d.completed %> completed<% end %>" id="q_<%= d.id %>">
           <td><%= link_to (d.student.fore_name + " " + d.student.last_name), edit_detention_path(:id =>d.id) %></td>
@@ -27,8 +27,8 @@
           <td><% if !d.completed %> <%= link_to "attended", edit_detention_path(:id => d.id), :class => "link", :id=>"m_#{d.id}", remote: true %><%  end %> </td>
         </tr>
     <% end %>
-    <tr ><td colspan="8" style="text-align: center">&nbsp;</td></tr>
-    <tr ><td colspan="8" style="text-align: center">All detentions</td></tr>
+    <tr><td colspan="8" style="text-align: center">&nbsp;</td></tr>
+    <tr><td colspan="8" style="text-align: center"><h4>All detentions</h4></td></tr>
 
 
   <% @detentions.each do |d| %>
@@ -46,7 +46,12 @@
   </tbody>
 </table>
 
-<%= button_tag 'Show/hide completed', {:id=>"det_show_hide", :class=> "btn btn-success"}%>
+<%= button_tag 'Show/hide completed', {:id=>"det_show_hide", :class=> "btn btn-small btn-info"}%>
 
 
 <p><%= link_to "New detention", new_detention_path %></p>
+
+
+
+
+<%= next_higher("senior", d_types) %>

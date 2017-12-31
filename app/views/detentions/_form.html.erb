@@ -7,40 +7,123 @@
   </ul>
 <% end %>
 
-<%= form_for  [@detention] do |f| %>
-  <p><%= f.label :detention_type %> <%= f.collection_select(:d_type, d_types, :first, :first)  %></p>
-  <p><%= f.label :user_id, "Staff"%> <%= f.collection_select(:user_id, @users, :id, :name, prompt: true ) %></p>
-  <p id="flash"><%= f.label :student_name %> <%= f.text_field :student_name, data: { autocomplete_source: students_path} %></p>
-  <% if @student %>
-    <p><%= link_to "New student", new_student_path, id:"new_student_link"%></p>
+<%= form_for(@detention, :html => {:class => "form-horizontal"}) do |f| %>
+
+  <div class="form-group row">
+    <%= f.label :student_name, :class => "col-sm-2 col-form-label"  %>
+      <div class="col-sm-5">
+      <%= f.text_field :student_name, data: { autocomplete_source: students_path}, :class => "form-control" %>
+    </div>
+  </div>
+
+  <% unless f.object.persisted?() %>
+    <a href="#myModal" id="as_button" role="button" class="btn btn-med btn-primary" data-toggle="modal">Add new student</a>
   <% end %>
-  <p><%= f.label :reason %> <%= f.text_field :reason %></p>
-  <p><%= f.label :date_set %> <%= f.date_select :date_set, {order: [:day, :month, :year]} %></p>
-  <p><%= f.label :date_due %> <%= f.date_select :date_due, {default: @detention.not_weekend , order: [:day, :month, :year]} %></p>
-  <fieldset>
-  <p><%= f.label :completed %> <%= f.check_box :completed %></p>
-  <p><%= f.label :date_completed %> <%= f.date_select :date_completed, order: [:day, :month, :year] %></p>
-  </fieldset>
+
+
+  <div class="form-group row">
+    <%= f.label :detention_type, :class => "col-sm-2 col-form-label" %>
+    <div class="col-sm-5">
+      <%= f.collection_select(:d_type, d_types, :first, :first, :class => "form-control")  %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :user_id, "Staff", :class => "col-sm-2 col-form-label" %>
+      <div class="col-sm-5">
+        <% selected = f.object.persisted?() ? @detention.user.id : current_user.id %>
+      <%= f.collection_select(:user_id, @users, :id, :name, {:selected => selected}, :class => "form-control" ) %>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  <div class="form-group row">
+    <%= f.label :reason, :class => "col-sm-2 col-form-label"  %>
+      <div class="col-sm-5">
+      <%= f.text_field :reason, :class => "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :date_set, :class => "col-sm-2 col-form-label"  %>
+      <div class="col-sm-5">
+      <%= f.date_select :date_set, {order: [:day, :month, :year]} %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :date_due, :class => "col-sm-2 col-form-label"  %>
+      <div class="col-sm-5">
+      <%= f.date_select :date_due, {default: @detention.not_weekend , order: [:day, :month, :year]} %>
+    </div>
+  </div>
+
+  <% if f.object.persisted?() %>
+  <div class="jumbotron">
+    <h2>Update detention</h2>
+    <div class="form-group row">
+      <%= f.label :completed, :class => "col-sm-2 col-form-label" %>
+      <div class="col-sm-5">
+        <%= f.check_box :completed %>
+      </div>
+    </div>
+
+    <%= link_to 'Delete this detention', detention_path, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+    <%  end %>
+
+    <div class="form-group row">
+      <%= f.label :date_completed, :class => "col-sm-2 col-form-label" %>
+      <div class="col-sm-5">
+        <%= f.date_select :date_completed, order: [:day, :month, :year] %>
+      </div>
+    </div>
 
   <%= f.hidden_field :student_id%>
 
   <p><%= f.submit "Set detention" %></p>
-  <% if f.object.persisted?() %>
-  <%= link_to 'Delete this detention', detention_path, method: :delete, data: { confirm: 'Are you sure?' } %>
-  <%  end %>
+</div>
+
+
 
 
 
 <% end %>
 
-<% if @student %>
-<div id="new_student_form">
-  <%= form_with(model: [@student], id: "new_student") do |f| %>
-    <p><%= f.label :first_name %> <%= f.text_field :fore_name %></p>
-    <p><%= f.label :last_name %> <%= f.text_field :last_name %></p>
-    <p><%= f.label :form_id %> <%= f.collection_select(:form_id, Form.all.order({name: :asc}), :id, :name, prompt: true ) %></p>
-    <p><%= f.submit "Submit", :id=>"student_submit"%></p>
 
-  <% end %>
+
+
+
+
+
+<% if @student %>
+<div id="myModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="new_student_formxxx">
+        <div class="modal-header">
+          <h4 class="modal-title">Add New Student</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+          <%= form_with(model: [@student], id: "new_student") do |f| %>
+            <p><%= f.label :first_name %> <%= f.text_field :fore_name %></p>
+            <p><%= f.label :last_name %> <%= f.text_field :last_name %></p>
+            <p><%= f.label :form_id %> <%= f.collection_select(:form_id, Form.all.order({name: :asc}), :id, :name, prompt: true ) %></p>
+            <p><%= f.submit "Submit", :id=>"student_submit"%></p>
+          <% end %>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <% end %>

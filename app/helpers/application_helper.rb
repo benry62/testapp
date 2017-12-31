@@ -14,4 +14,14 @@ module ApplicationHelper
     f["detention_types"]
   end
 
+  def next_higher(k, dt)
+    time = dt[k]
+    sorted = dt.sort_by {|_,time| time }
+    next_val = sorted.find(sorted.method(:first)) { |_,t| t >time }.first
+    k == sorted.last.first ? k : next_val
+  end
+
+
+
+
 end

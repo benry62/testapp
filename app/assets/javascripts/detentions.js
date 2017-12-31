@@ -2,12 +2,16 @@
 
 $(document).on('turbolinks:load', function() {
 
-  $("#new_student_form").hide()
-
+  $("#as_button").hide();
 
   $( "#detention_student_name" ).autocomplete({
     minLength: 2,
     source: $('#detention_student_name').data('autocomplete-source'),
+    response: function( event, ui ) {
+      if( ui["content"].length == 0) {
+        $("#as_button").fadeIn(400);
+      }
+    },
     select: function (event, ui) {
           $("#detention_student_name").val(ui.item.label); // display the selected text
           $("#detention_student_id").val(ui.item.value); // save selected id to hidden input
@@ -15,10 +19,6 @@ $(document).on('turbolinks:load', function() {
         }
     });
 
-  $("#new_student_link").click(function (){
-    $("#new_student_form").toggle()
-    return false;
-  });
 
   $("#student_submit").click(function(){
     var valuesToSubmit = $("#new_student").serialize();
@@ -32,20 +32,12 @@ $(document).on('turbolinks:load', function() {
           $("#detention_student_name").val(data.fore_name + " " + data.last_name)
           // write student id to hidden values
           $("#detention_student_id").val(''+data.id)
-          $("#new_student_form").fadeOut()
-          $("#flash").effect("highlight", {}, 1500);;
-        //  var returned_values = JSON.parse(data);
-        //  alert (returned_values.last_name);
-
+          $("#myModal").modal('toggle');
         }
     });
     return false;
   });
 
-  $('#year_selector').change(function(){
-    alert("woo")
-
-  });
 
 
 

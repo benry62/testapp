@@ -2,6 +2,9 @@ class Detention < ApplicationRecord
   belongs_to :user
   belongs_to :student
 
+  #before_save   :modify_date_params
+
+  #attr_accessor :ro
 
 
   def is_completed(params)
@@ -26,23 +29,21 @@ class Detention < ApplicationRecord
     1.day.from_now.on_weekday? ? 1.day.from_now : Date.today + ((1 - Date.today.wday) % 7)
   end
 
-  def rollover
-    puts "self.date_due = " + self.date_due.strftime("%a %-d %b %y")
+  def rollover(detention_params)
     next_date = self.date_due + 1.day
-    puts "next_date = " + next_date.strftime("%a %-d %b %y")
-
     if next_date.on_weekday?
-      puts "true"
-      self.date_due = next_date
-      puts "self.date_due = " + self.date_due.strftime("%a %-d %b %y")
+      detention_params[:date_due] = next_date
     else
-      puts "fale"
-
-      self.date_due = Date.today + ((1 - Date.today.wday) % 7)
-      puts "self.date_due = " + self.date_due.strftime("%a %-d %b %y")
-
+      detention_params[:date_due] = Date.today + ((1 - Date.today.wday) % 7)
     end
-    self.save
+    detention_params
   end
+
+  def modify_date_params
+
+  end
+
+
+
 
 end

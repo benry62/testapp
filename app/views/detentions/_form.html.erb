@@ -11,8 +11,8 @@
 
   <div class="form-group row">
     <%= f.label :student_name, :class => "col-sm-2 col-form-label"  %>
-      <div class="col-sm-5">
-      <%= f.text_field :student_name, data: { autocomplete_source: students_path}, :class => "form-control" %>
+    <div class="col-sm-5">
+    <%= f.text_field :student_name, data: { autocomplete_source: students_path}, :class => "form-control" %>
     </div>
   </div>
 
@@ -40,27 +40,34 @@
 
 
 
-
+  <% default_time = f.object.persisted?() ? @detention.date_set.strftime("%a %-d %b %y") : nil %>
 
 
   <div class="form-group row">
     <%= f.label :reason, :class => "col-sm-2 col-form-label"  %>
-      <div class="col-sm-5">
+    <div class="col-sm-5">
       <%= f.text_field :reason, :class => "form-control" %>
     </div>
   </div>
 
+  <% default_set = f.object.persisted?() ? @detention.date_set.strftime("%a %-d %b %y") : nil %>
   <div class="form-group row">
     <%= f.label :date_set, :class => "col-sm-2 col-form-label"  %>
-      <div class="col-sm-5">
-      <%= f.date_select :date_set, {order: [:day, :month, :year]} %>
+    <div class="col-sm-5">
+      <%= f.text_field :date_set, :class =>"form-control", :value => default_time %>
     </div>
   </div>
 
+  <% default_due = f.object.persisted?() ? @detention.date_due.strftime("%a %-d %b %y") : nil %>
   <div class="form-group row">
     <%= f.label :date_due, :class => "col-sm-2 col-form-label"  %>
-      <div class="col-sm-5">
-      <%= f.date_select :date_due, {default: @detention.not_weekend , order: [:day, :month, :year]} %>
+    <div class="col-sm-5">
+      <div class="input-group date" data-provide="datepicker">
+        <%= f.text_field :date_due, :class =>"form-control", :value => default_due %>
+        <div class="input-group-addon">
+            <span class="glyphicon glyphicon-th"></span>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -74,34 +81,26 @@
         </div>
       </div>
 
+      <a href="#rollover" id="rollover" role="button" class="btn btn-med btn-primary" >rollover</a>
+
+      <% default_completed = f.object.persisted?() ? @detention.date_completed.strftime("%a %-d %b %y") : nil %>
       <div class="form-group row">
-        <%= f.label :date_completed, :class => "col-sm-2 col-form-label" %>
+        <%= f.label :date_completed, :class => "col-sm-2 col-form-label "  %>
         <div class="col-sm-5">
-          <%= f.date_select :date_completed, order: [:day, :month, :year] %>
+          <%= f.text_field :date_completed, :class =>"form-control", :value => default_completed %>
         </div>
       </div>
 
+
       <%= link_to 'Delete this detention', detention_path, method: :delete, data: { confirm: 'Are you sure?' } %>
       <p> rollover, update, delete </p>
-
+    </div>
     <%  end %>
 
-  </div>
-
-
   <%= f.hidden_field :student_id%>
-
   <p><%= f.submit "Set detention" %></p>
 
-
-
-
-
 <% end %>
-
-
-
-
 
 
 
@@ -109,22 +108,20 @@
 <div id="myModal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div id="new_student_formxxx">
-        <div class="modal-header">
-          <h4 class="modal-title">Add New Student</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        </div>
-        <div class="modal-body">
-          <%= form_with(model: [@student], id: "new_student") do |f| %>
-            <p><%= f.label :first_name %> <%= f.text_field :fore_name %></p>
-            <p><%= f.label :last_name %> <%= f.text_field :last_name %></p>
-            <p><%= f.label :form_id %> <%= f.collection_select(:form_id, Form.all.order({name: :asc}), :id, :name, prompt: true ) %></p>
-            <p><%= f.submit "Submit", :id=>"student_submit"%></p>
-          <% end %>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
+      <div class="modal-header">
+        <h4 class="modal-title">Add New Student</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body">
+        <%= form_with(model: [@student], id: "new_student") do |f| %>
+          <p><%= f.label :first_name %> <%= f.text_field :fore_name %></p>
+          <p><%= f.label :last_name %> <%= f.text_field :last_name %></p>
+          <p><%= f.label :form_id %> <%= f.collection_select(:form_id, Form.all.order({name: :asc}), :id, :name, prompt: true ) %></p>
+          <p><%= f.submit "Submit", :id=>"student_submit"%></p>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

@@ -38,10 +38,31 @@ $(document).on('turbolinks:load', function() {
     return false;
   });
 
+  $("#rollover").click(function(){
+    var d = new Date();
+    alert("day of week= " + d.getDay() + " date = " + d.getDate() + " month =" + (parseInt(d.getMonth()) + 1) + " year = " + d.getFullYear())
+    //alert($("#detention_date_due_3i").val())d.
+
+  })
 
 
+  $('#detention_date_set').datepicker({
+    beforeShowDay: $.datepicker.noWeekends
+  });
+  $('#detention_date_set').datepicker('option', 'dateFormat', 'dd-mm-yy');
 
 
+  $('#detention_date_due').datepicker({
+    beforeShowDay: $.datepicker.noWeekends
+  });
+//  $('#detention_date_due').datepicker({ dateFormat: 'yy-mm-dd' });
+  $('#detention_date_due').datepicker('option', 'dateFormat', 'dd-mm-yy');
+
+
+  $('#detention_date_completed').datepicker({
+    beforeShowDay: $.datepicker.noWeekends
+  });
+  $('#detention_date_completed').datepicker('option', 'dateFormat', 'dd-mm-yy');
 
 
 

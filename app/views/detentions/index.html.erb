@@ -1,5 +1,12 @@
 <h2> Detentions</h2>
 
+
+
+
+<%= link_to "New detention", new_detention_path, {:class => "btn btn-small btn-success"} %>
+<%= button_tag 'Show/hide completed', {:id=>"det_show_hide", :class=> "btn btn-small btn-info"}%>
+
+
 <table id="detention_table">
   <thead>
     <tr>
@@ -46,7 +53,6 @@
   </tbody>
 </table>
 
-<%= button_tag 'Show/hide completed', {:id=>"det_show_hide", :class=> "btn btn-small btn-info"}%>
 
 
 <p><%= link_to "New detention", new_detention_path %></p>

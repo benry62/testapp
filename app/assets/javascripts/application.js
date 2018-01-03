@@ -53,6 +53,9 @@ $(document).on('turbolinks:load', function() {
         return false;
       });
 
+      $("#detention_table .completed").hide()
+
+
       $( "#det_show_hide" ).click(function() {
         $("#detention_table .completed").toggle(400);
       });

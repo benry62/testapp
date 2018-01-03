@@ -45,26 +45,34 @@ $(document).on('turbolinks:load', function() {
 
   })
 
+  var detention_ds = ($("#detention_date_set").val() === undefined) ?  '' : detention_ds = $("#detention_date_set").val()
+  var detention_dd = ($("#detention_date_due").val() === undefined) ?  '' : detention_dd = $("#detention_date_due").val()
+  var detention_dc = ($("#detention_date_completed").val() === undefined) ?  '' : detention_dc = $("#detention_date_completed").val()
 
   $('#detention_date_set').datepicker({
     beforeShowDay: $.datepicker.noWeekends
-  });
+    })
+  $('#detention_date_set').datepicker( "setDate", new Date(uk_to_us_date(detention_ds)) )
   $('#detention_date_set').datepicker('option', 'dateFormat', 'dd-mm-yy');
-
 
   $('#detention_date_due').datepicker({
     beforeShowDay: $.datepicker.noWeekends
-  });
-//  $('#detention_date_due').datepicker({ dateFormat: 'yy-mm-dd' });
+    })
+  $('#detention_date_due').datepicker( "setDate", new Date(uk_to_us_date(detention_dd)) )
   $('#detention_date_due').datepicker('option', 'dateFormat', 'dd-mm-yy');
-
 
   $('#detention_date_completed').datepicker({
     beforeShowDay: $.datepicker.noWeekends
-  });
+    })
+  $('#detention_date_completed').datepicker( "setDate", new Date(uk_to_us_date(detention_dc)) )
   $('#detention_date_completed').datepicker('option', 'dateFormat', 'dd-mm-yy');
 
 
 
+function uk_to_us_date(date_string) {
+    var res = date_string.split("/");
+    var us_date = res[1] + "/" + res[0] + "/" + res[2]
+    return us_date
+  }
 
 }); // end of main wrapper

@@ -8,7 +8,6 @@
 <% end %>
 
 <%= form_for(@detention, :html => {:class => "form-horizontal"}) do |f| %>
-
   <div class="form-group row">
     <%= f.label :student_name, :class => "col-sm-2 col-form-label"  %>
     <div class="col-sm-5">
@@ -38,11 +37,6 @@
 
 
 
-
-
-  <% default_time = f.object.persisted?() ? @detention.date_set.strftime("%a %-d %b %y") : nil %>
-
-
   <div class="form-group row">
     <%= f.label :reason, :class => "col-sm-2 col-form-label"  %>
     <div class="col-sm-5">
@@ -50,20 +44,25 @@
     </div>
   </div>
 
-  <% default_set = f.object.persisted?() ? @detention.date_set.strftime("%a %-d %b %y") : nil %>
   <div class="form-group row">
     <%= f.label :date_set, :class => "col-sm-2 col-form-label"  %>
     <div class="col-sm-5">
-      <%= f.text_field :date_set, :class =>"form-control", :value => default_time %>
+      <div class="input-group date" data-provide="datepicker">
+        <% value = f.object.persisted?() ? @detention.date_set.strftime("%d/%m/%y") : Date.today %>
+        <%= f.text_field :date_set, :class =>"form-control", :value => value %>
+        <div class="input-group-addon">
+            <span class="glyphicon glyphicon-th"></span>
+        </div>
+      </div>
     </div>
   </div>
 
-  <% default_due = f.object.persisted?() ? @detention.date_due.strftime("%a %-d %b %y") : nil %>
   <div class="form-group row">
     <%= f.label :date_due, :class => "col-sm-2 col-form-label"  %>
     <div class="col-sm-5">
       <div class="input-group date" data-provide="datepicker">
-        <%= f.text_field :date_due, :class =>"form-control", :value => default_due %>
+        <% value_plus_one = f.object.persisted?() ? @detention.date_due.strftime("%d/%m/%y") : @detention.not_weekend %>
+        <%= f.text_field :date_due, :class =>"form-control", :value => value_plus_one %>
         <div class="input-group-addon">
             <span class="glyphicon glyphicon-th"></span>
         </div>
@@ -83,11 +82,15 @@
 
       <a href="#rollover" id="rollover" role="button" class="btn btn-med btn-primary" >rollover</a>
 
-      <% default_completed = f.object.persisted?() ? @detention.date_completed.strftime("%a %-d %b %y") : nil %>
       <div class="form-group row">
-        <%= f.label :date_completed, :class => "col-sm-2 col-form-label "  %>
+        <%= f.label :date_completed, :class => "col-sm-2 col-form-label"  %>
         <div class="col-sm-5">
-          <%= f.text_field :date_completed, :class =>"form-control", :value => default_completed %>
+          <div class="input-group date" data-provide="datepicker">
+            <%= f.text_field :date_completed, :class =>"form-control"%>
+            <div class="input-group-addon">
+                <span class="glyphicon glyphicon-th"></span>
+            </div>
+          </div>
         </div>
       </div>
 

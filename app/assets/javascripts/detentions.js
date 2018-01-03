@@ -2,6 +2,8 @@
 
 $(document).on('turbolinks:load', function() {
 
+
+
   $("#as_button").hide();
 
   $( "#detention_student_name" ).autocomplete({
@@ -38,12 +40,6 @@ $(document).on('turbolinks:load', function() {
     return false;
   });
 
-  $("#rollover").click(function(){
-    var d = new Date();
-    alert("day of week= " + d.getDay() + " date = " + d.getDate() + " month =" + (parseInt(d.getMonth()) + 1) + " year = " + d.getFullYear())
-    //alert($("#detention_date_due_3i").val())d.
-
-  })
 
   var detention_ds = ($("#detention_date_set").val() === undefined) ?  '' : detention_ds = $("#detention_date_set").val()
   var detention_dd = ($("#detention_date_due").val() === undefined) ?  '' : detention_dd = $("#detention_date_due").val()
@@ -69,10 +65,43 @@ $(document).on('turbolinks:load', function() {
 
 
 
-function uk_to_us_date(date_string) {
+  $("#rollover").click(function(){
+    // Get the next day
+    var dd = $('#detention_date_due').datepicker('getDate')
+    var add_days = (dd.getDay() == 5) ? 3 : 1 // tests if Friday
+    $('#detention_date_due').datepicker( "setDate", new Date(addDays(dd, add_days)) )
+    // now have to send all of this via Ajax as datepicker functions are re-setting
+    //var form_id = $("[id^='edit_detention_']").val()
+
+    var valuesToSubmit = $("[id^='edit_detention_']").serialize();
+    $.ajax({
+        type: 'POST',
+        url: $("[id^='edit_detention_']").attr('action'),
+        dataType: 'json',
+        data: valuesToSubmit,
+        success: function(data, textStatus, jqXHR) {
+          // write students name in text field
+          alert ("woo hoo")
+        }
+    });
+
+  })
+
+
+
+
+
+  function uk_to_us_date(date_string) {
     var res = date_string.split("/");
     var us_date = res[1] + "/" + res[0] + "/" + res[2]
     return us_date
   }
+
+  function addDays(date, days) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
+
 
 }); // end of main wrapper

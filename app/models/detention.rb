@@ -1,11 +1,15 @@
 class Detention < ApplicationRecord
   belongs_to :user
   belongs_to :student
+  validate :due_date_cant_be_before_set_date
 
-  #before_save   :modify_date_params
 
-  #attr_accessor :ro
 
+  def due_date_cant_be_before_set_date
+    if date_set.present? && date_due.present? && date_due < date_set
+      errors.add(:date_due, "can't be before the date set")
+    end
+  end
 
   def is_completed(params)
     if params[:completed]
@@ -39,9 +43,7 @@ class Detention < ApplicationRecord
     detention_params
   end
 
-  def modify_date_params
 
-  end
 
 
 

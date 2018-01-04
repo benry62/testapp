@@ -33,15 +33,7 @@ class Detention < ApplicationRecord
     1.day.from_now.on_weekday? ? 1.day.from_now : Date.today + ((1 - Date.today.wday) % 7)
   end
 
-  def rollover(detention_params)
-    next_date = self.date_due + 1.day
-    if next_date.on_weekday?
-      detention_params[:date_due] = next_date
-    else
-      detention_params[:date_due] = Date.today + ((1 - Date.today.wday) % 7)
-    end
-    detention_params
-  end
+
 
 
 

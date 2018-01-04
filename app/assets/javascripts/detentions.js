@@ -5,7 +5,7 @@ $(document).on('turbolinks:load', function() {
 
 
   $("#as_button").hide();
-
+  $("#update").hide();
   $( "#detention_student_name" ).autocomplete({
     minLength: 2,
     source: $('#detention_student_name').data('autocomplete-source'),
@@ -71,8 +71,6 @@ $(document).on('turbolinks:load', function() {
     var add_days = (dd.getDay() == 5) ? 3 : 1 // tests if Friday
     $('#detention_date_due').datepicker( "setDate", new Date(addDays(dd, add_days)) )
     // now have to send all of this via Ajax as datepicker functions are re-setting
-    //var form_id = $("[id^='edit_detention_']").val()
-
     var valuesToSubmit = $("[id^='edit_detention_']").serialize();
     $.ajax({
         type: 'POST',
@@ -80,14 +78,40 @@ $(document).on('turbolinks:load', function() {
         dataType: 'json',
         data: valuesToSubmit,
         success: function(data, textStatus, jqXHR) {
-          // write students name in text field
-          alert ("woo hoo")
+          if (confirm ("Detention rolled over")) {
+            //  window.location.href = "/detentions";
+          };
         }
     });
 
   })
 
+  $("#complete").click(function(){
+    let send_data = {
+      detention: {
+        completed: 1
+      }
+    };
+    $.ajax({
+      type: 'PATCH',
+      url: $("[id^='edit_detention_']").attr('action'),
+      data: send_data,
+      success: function(data, textStatus, jqXHR) {
+        if (confirm ("Detention completed")) {
+            window.location.href = "/detentions";
+        };
+      }
+    });
+  });
 
+  $("#update").click(function() {
+  //  alert("update clicked")
+  });
+
+  $("#ub").click(function(){
+    $("#update").slideToggle();
+    return false;
+  });
 
 
 

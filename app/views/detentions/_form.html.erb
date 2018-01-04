@@ -71,62 +71,44 @@
   </div>
 
   <% if f.object.persisted?() %>
-    <div class="jumbotron">
-      <h2>Update detention</h2>
-      <div class="form-group row">
-        <%= f.label :completed, :class => "col-sm-2 col-form-label" %>
-        <div class="col-sm-5">
-          <%= f.check_box :completed %>
-        </div>
+  <a href="#" id="ub" role="button" class="btn btn-med btn-success" >Update</a>
+    <div class="jumbotron col-sm-7" id="update">
+      <div class="btn-group btn-med" role="group" aria-label="Basic example">
+        <a href="#" id="complete" role="button" class="btn  btn-primary" >Completed</a>
+        <a href="#" id="rollover" role="button" class="btn  btn-primary" >Rollover</a>
+        <a href="#" id="update" role="button" class="btn  btn-primary" >Update</a>
+        <%= link_to "Delete", detention_path, method: :delete, class: "btn  btn-danger", data: { confirm: "This will permanently delete this detention. Are you sure?" }  %>
       </div>
-
-      <a href="#rollover" id="rollover" role="button" class="btn btn-med btn-primary" >rollover</a>
-
-      <div class="form-group row">
-        <%= f.label :date_completed, :class => "col-sm-2 col-form-label"  %>
-        <div class="col-sm-5">
-          <div class="input-group date" data-provide="datepicker">
-            <%= f.text_field :date_completed, :class =>"form-control"%>
-            <div class="input-group-addon">
-                <span class="glyphicon glyphicon-th"></span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <%= link_to 'Delete this detention', detention_path, method: :delete, data: { confirm: 'Are you sure?' } %>
-      <p> rollover, update, delete </p>
     </div>
     <%  end %>
 
+  </br >
   <%= f.hidden_field :student_id%>
+  </br>
   <p><%= f.submit "Set detention" %></p>
 
 <% end %>
 
-
-
 <% if @student %>
-<div id="myModal" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Add New Student</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      </div>
-      <div class="modal-body">
-        <%= form_with(model: [@student], id: "new_student") do |f| %>
-          <p><%= f.label :first_name %> <%= f.text_field :fore_name %></p>
-          <p><%= f.label :last_name %> <%= f.text_field :last_name %></p>
-          <p><%= f.label :form_id %> <%= f.collection_select(:form_id, Form.all.order({name: :asc}), :id, :name, prompt: true ) %></p>
-          <p><%= f.submit "Submit", :id=>"student_submit"%></p>
-        <% end %>
-      </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  <div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add New Student</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+          <%= form_with(model: [@student], id: "new_student") do |f| %>
+            <p><%= f.label :first_name %> <%= f.text_field :fore_name %></p>
+            <p><%= f.label :last_name %> <%= f.text_field :last_name %></p>
+            <p><%= f.label :form_id %> <%= f.collection_select(:form_id, Form.all.order({name: :asc}), :id, :name, prompt: true ) %></p>
+            <p><%= f.submit "Submit", :id=>"student_submit"%></p>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 <% end %>

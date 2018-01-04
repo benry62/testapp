@@ -14,6 +14,11 @@ module ApplicationHelper
     f["detention_types"]
   end
 
+  def years
+    f = YAML.load_file("config/school_config.yml")
+    f["years"]
+  end
+
   def next_higher(k, dt)
     time = dt[k]
     sorted = dt.sort_by {|_,time| time }

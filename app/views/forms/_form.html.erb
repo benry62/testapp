@@ -11,7 +11,10 @@
 <%= form_for @form do |f| %>
 
 <p><%= f.label :name %> <%= f.text_field :name %></p>
-<p><%= f.label :year_id, "Year"%> <%= f.collection_select(:year_id, Year.all, :id, :name, prompt: true ) %></p>
+<p><%= f.label :year %> <%= f.collection_select(:year, years, :first, :first, :class => "form-control")  %></p>
+
+
+
 <p><%= f.submit "submit" %>
 
 <% end %>

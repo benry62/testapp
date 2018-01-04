@@ -7,3 +7,12 @@ detention_types:
   lunch_time: 30
   after_school: 60
   senior: 61
+
+years:
+  7: 7
+  8: 8
+  9: 9
+  10: 10
+  11: 11
+  12: 12
+  13: 13

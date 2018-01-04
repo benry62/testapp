@@ -1,6 +1,6 @@
 <h2><%= @student.fore_name + " " + @student.last_name %></h2>
 
-<p><strong>Form: </strong><%= @student.form.name %> | <strong>Year: </strong><%= @student.form.year.name %></p>
+<p><strong>Form: </strong><%= @student.form.name %> 
 <%= link_to 'edit', edit_student_path(@student.id) %> | <%= link_to 'back', students_path %>
 
 

@@ -1,19 +1,19 @@
 <h2><%= (@user.name) %></h2>
 
-<p><%= @user.department.name %> | <%= @user.role.name %></p>
+<p><%= @user.department.name %> | <%= @user.role.name %> | <%= link_to 'edit', edit_user_path(@user.id) %> </p>
 
-<%= link_to 'edit', edit_user_path(@user.id) %> | <%= link_to 'back', users_path %>
+
 
 
 <h3>Detentions</h3>
-<table>
+<table width="80%">
   <thead>
     <tr>
-      <th>Student</th>
-      <th>Date set</th>
-      <th>Reason</th>
-      <th>Type</th>
-      <th>Completed</th>
+      <th width="30%">Student</th>
+      <th width="20%">Date set</th>
+      <th width="20%">Reason</th>
+      <th width="15%">Type</th>
+      <th >Completed</th>
     </tr>
   </thead>
   <tbody>

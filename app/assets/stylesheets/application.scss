@@ -14,7 +14,11 @@
  *= require_self
  */
  // Custom bootstrap variables must be set or imported *before* bootstrap.
- @import "bootstrap";
+ /*
+  *= require jquery-tablesorter/theme.default
+  */
+
+
 
 .odd {
   background-color: #e6f2ff;
@@ -26,3 +30,8 @@
 .alert {
   	color: #4F8A10;
 }
+
+a.navbar-nav:hover, a.navbar-nav:active {color: red;}
+
+
+@import "bootstrap";

@@ -1,10 +1,21 @@
-<h1><%= school_name %></h1>
+
 
 <% unless @user.first.nil?  %>
-<h2>Teachers</h2>
-    <% @user.each do |t| %>
-      <p><%= link_to  t.name, edit_user_path(:id => t.id) %> | <%= t.department.name %> | <%= t.role.name %> </p>
-    <% end %>
-  <% else %>
+  <h3>Staff</h3>
+  <table id="Staff_table">
+    <thead>
+      <tr>
+        <th >Name</th>
+        <th width="35%">Department</th>
+        <th width="15%">Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @user.each do |t| %>
+        <tr class="<%= cycle('even', 'odd') %>"><td><%= link_to  t.name, user_path(:id => t.id) %></td><td><%= t.department.name %></td><td><%= t.role.name %> </td></tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
   <h2> This school has no staff </h2>
-  <% end %>
+<% end %>

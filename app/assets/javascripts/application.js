@@ -20,6 +20,8 @@
 //= require bootstrap-sprockets
 
 
+
+
 $(document).on('turbolinks:load', function() {
   //    $("#detention_table .completed").hide();
 

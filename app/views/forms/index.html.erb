@@ -10,7 +10,7 @@
   <tbody>
 
 <% @forms.each do |t| %>
-  <tr><td><%= link_to (t.name), form_path(t.id) %> </td><td>  <%= t.year %> </td></tr>
+  <tr class="<%= cycle('odd', 'even') %>"><td><%= link_to (t.name), form_path(t.id) %> </td><td>  <%= t.year %> </td></tr>
 <% end %>
 </tbody>
 </table>

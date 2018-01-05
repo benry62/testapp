@@ -105,7 +105,33 @@ $(document).on('turbolinks:load', function() {
   });
 
   $("#update").click(function() {
-  //  alert("update clicked")
+    var nv
+    var d_types = $("#detention_types").text()
+    var res = d_types.split(",");
+    var d_select = ($("#detention_d_type").val())
+    var i = res.indexOf(d_select)
+    var rl = res.length;
+    // add one to the index unless index = rl
+    if (i + 1 <= rl-1) {
+       nv = res[i + 1 ]
+    } else {
+       nv = res[rl-1]
+    }
+    $("#detention_d_type").val(nv)
+    var valuesToSubmit = $("[id^='edit_detention_']").serialize();
+
+    $.ajax({
+      type: 'PATCH',
+      url: $("[id^='edit_detention_']").attr('action'),
+      data: valuesToSubmit,
+      success: function(data, textStatus, jqXHR) {
+        if (confirm ("Detention escalated")) {
+           window.location.href = "/detentions";
+        };
+      }
+    });
+
+
   });
 
   $("#ub").click(function(){

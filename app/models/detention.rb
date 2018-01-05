@@ -22,7 +22,7 @@ class Detention < ApplicationRecord
   end
 
   def is_overdue
-    return (self.date_due < Date.today && !(self.completed))? true: false
+    return (self.date_due < Date.today && !(self.completed))? true : false
   end
 
   def student_name
@@ -37,7 +37,16 @@ class Detention < ApplicationRecord
     1.day.from_now.on_weekday? ? 1.day.from_now : Date.today + ((1 - Date.today.wday) % 7)
   end
 
-
+  def is_escalated(params)
+    debugger
+    if params[:detention][:escalate]
+      if params[:detention][:escalate] == "1"
+        return [params.except[:detention][:escalate], true]
+      end
+    else
+      return [params, false]
+    end
+  end
 
 
 

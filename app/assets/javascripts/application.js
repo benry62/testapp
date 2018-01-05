@@ -62,6 +62,8 @@ $(document).on('turbolinks:load', function() {
         $("#detention_table .completed").toggle(400);
       });
 
-
+      $("[class^='a_box']").click(function(){
+        $("[class^='a_box']").hide("slow")
+      });
 
 });

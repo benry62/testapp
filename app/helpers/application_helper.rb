@@ -26,7 +26,22 @@ module ApplicationHelper
     k == sorted.last.first ? k : next_val
   end
 
+  def flash_class(level)
+      case level
+      when "notice" then "alert alert-info"
+      when "success" then "alert alert-success"
+      when "error" then "alert alert-error"
+      when "alert" then "alert alert-error"
+      end
+  end
 
-
+  def d_types_keys
+    val = ''
+    d_types.each do |key, value|
+      val = val + "," + key
+    end
+    val.slice!(0)  #strips off the first comma
+    val
+  end
 
 end

@@ -21,6 +21,10 @@ class Detention < ApplicationRecord
     end
   end
 
+  def is_overdue
+    return (self.date_due < Date.today && !(self.completed))? true: false
+  end
+
   def student_name
     student.try(:last_name)
   end

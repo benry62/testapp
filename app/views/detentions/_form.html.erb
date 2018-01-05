@@ -71,10 +71,10 @@
   </div>
 
   <% if f.object.persisted?() %>
-  <a href="#" id="ub" role="button" class="btn btn-med btn-success" >Update</a>
+  <a href="#" id="ub" role="button" class="btn btn-med btn-success" >Tools</a>
     <div class="jumbotron col-sm-7" id="update">
       <div class="btn-group btn-med" role="group" aria-label="Basic example">
-        <a href="#" id="complete" role="button" class="btn  btn-primary" >Completed</a>
+        <a href="#" id="complete" role="button" class="btn  btn-primary" >Complete</a>
         <a href="#" id="rollover" role="button" class="btn  btn-primary" >Rollover</a>
         <a href="#" id="update" role="button" class="btn  btn-primary" >Update</a>
         <%= link_to "Delete", detention_path, method: :delete, class: "btn  btn-danger", data: { confirm: "This will permanently delete this detention. Are you sure?" }  %>
@@ -85,7 +85,7 @@
   </br >
   <%= f.hidden_field :student_id%>
   </br>
-  <p><%= f.submit "Set detention" %></p>
+  <p><%= f.submit (controller.action_name + " detention").titleize %></p>
 
 <% end %>
 
@@ -101,7 +101,7 @@
           <%= form_with(model: [@student], id: "new_student") do |f| %>
             <p><%= f.label :first_name %> <%= f.text_field :fore_name %></p>
             <p><%= f.label :last_name %> <%= f.text_field :last_name %></p>
-            <p><%= f.label :form_id %> <%= f.collection_select(:form_id, Form.all.order({name: :asc}), :id, :name, prompt: true ) %></p>
+            <p><%= f.label :form_id %> <%= f.collection_select(:form_id, Form.all.order({year: :asc, name: :asc}), :id, :name, prompt: true ) %></p>
             <p><%= f.submit "Submit", :id=>"student_submit"%></p>
           <% end %>
         </div>

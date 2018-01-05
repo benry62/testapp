@@ -79,7 +79,7 @@ $(document).on('turbolinks:load', function() {
         data: valuesToSubmit,
         success: function(data, textStatus, jqXHR) {
           if (confirm ("Detention rolled over")) {
-            //  window.location.href = "/detentions";
+              window.location.href = "/detentions";
           };
         }
     });

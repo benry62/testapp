@@ -16,8 +16,9 @@
  // Custom bootstrap variables must be set or imported *before* bootstrap.
  /*
   */
+@import "bootstrap";
 
-
+tr{ height:34px; }
 
 .odd {
   background-color: #e6f2ff;
@@ -30,7 +31,12 @@
   	color: #4F8A10;
 }
 
+.overdue {
+  color: #FF0000;
+}
+
 a.navbar-nav:hover, a.navbar-nav:active {color: red;}
 
-
-@import "bootstrap";
+.sm {
+  margin-left: 15px;
+}

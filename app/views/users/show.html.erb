@@ -10,15 +10,16 @@
   <thead>
     <tr>
       <th width="30%">Student</th>
-      <th width="20%">Date set</th>
-      <th width="20%">Reason</th>
+      <th width="15%">Date set</th>
+      <th width="15%">Date due</th>
+      <th width="15%">Reason</th>
       <th width="15%">Type</th>
       <th >Completed</th>
     </tr>
   </thead>
   <tbody>
-<% @user.detentions.each do |d| %>
-  <tr class="<%= cycle('even', 'odd') %>"><td><%= d.student.full_name%></td><td><%= d.date_due.strftime("%a %-d %b %y") %></td><td><%= d.reason %></td><td><%= d.d_type.humanize %></td><td><%= d.completed %></td></tr>
+<% @detentions.each do |d| %>
+  <tr class="<%= cycle('even', 'odd') %><% if d.is_overdue %> overdue<% end %>"><td><%= d.student.full_name%></td><td><%= d.date_set.strftime("%a %-d %b %y") %></td><td><%= d.date_due.strftime("%a %-d %b %y") %></td><td><%= d.reason %></td><td><%= d.d_type.humanize %></td><td><%= human_boolean(d.completed) %></td></tr>
 <% end %>
   </tbody>
 </table>

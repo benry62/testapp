@@ -46,7 +46,7 @@ $(document).on('turbolinks:load', function() {
           success: function(){
             $("#r_"+link_id).addClass("completed");
             $("#q_"+link_id).addClass("completed");
-            $("#detention_table .completed").hide();
+            $("#detention_table .completed").hide("slow");
             $("#l_"+link_id).remove();
             $("#m_"+link_id).remove();
             return false;

@@ -7,23 +7,23 @@
 <%= button_tag 'Show/hide completed', {:id=>"det_show_hide", :class=> "btn btn-small btn-info"}%>
 
 
-<table id="detention_table">
+<table id="detention_table" width="100%">
   <thead>
     <tr>
-      <th width="22%">Name</th>
-      <th width="5%">Form</th>
-      <th width="11%">Date set</th>
-      <th width="11%">Date due</th>
-      <th width="10%">Type</th>
-      <th width="16%">Reason</th>
-      <th width="19%">Set By</th>
+      <th width="16%">Name</th>
+      <th width="7%">Form</th>
+      <th width="12%">Date set</th>
+      <th width="12%">Date due</th>
+      <th width="12%">Type</th>
+      <th width="15%">Reason</th>
+      <th width="16%">Set By</th>
       <th>Attended</th>
     </tr>
   </thead>
   <tbody>
     <tr><td colspan="8" style="text-align: center"><h4>My detentions</h4></td></tr>
     <% @my_detentions.each do |d| %>
-        <tr class="<%= cycle('odd', 'even') %><% if d.completed %> completed<% end %>" id="q_<%= d.id %>">
+        <tr class="<%= cycle('odd', 'even') %><% if d.completed %> completed<% end %><% if d.is_overdue %> overdue<% end %>" id="q_<%= d.id %>">
           <td><%= link_to (d.student.fore_name + " " + d.student.last_name), edit_detention_path(:id =>d.id) %></td>
           <td><%= d.student.form.name %></td>
           <td><%= d.date_set.strftime("%a %-d %b %y") %></td>
@@ -31,7 +31,7 @@
           <td><%= d.d_type.humanize %></td>
           <td><%= d.reason %></td>
           <td><%= d.user.name %></td>
-          <td><% if !d.completed %> <%= link_to "attended", edit_detention_path(:id => d.id), :class => "link", :id=>"m_#{d.id}", remote: true %><%  end %> </td>
+          <td><% if !d.completed %> <%= link_to "attended", edit_detention_path(:id => d.id), :class => "btn  btn-sm btn-success link", :id=>"m_#{d.id}", remote: true %><%  end %> </td>
         </tr>
     <% end %>
     <tr><td colspan="8" style="text-align: center">&nbsp;</td></tr>
@@ -39,7 +39,7 @@
 
 
   <% @detentions.each do |d| %>
-      <tr class="<%= cycle('odd', 'even') %><% if d.completed %> completed<% end %>" id="r_<%= d.id %>">
+      <tr class="<%= cycle('odd', 'even') %><% if d.completed %> completed<% end %> <% if d.is_overdue %> overdue<% end %>" id="r_<%= d.id %>">
         <td><%= link_to (d.student.fore_name + " " + d.student.last_name), edit_detention_path(:id =>d.id) %></td>
         <td><%= d.student.form.name %></td>
         <td><%= d.date_set.strftime("%a %-d %b %y") %></td>
@@ -47,7 +47,7 @@
         <td><%= d.d_type.humanize %></td>
         <td><%= d.reason %></td>
         <td><%= d.user.name %></td>
-        <td><% if !d.completed %> <%= link_to "attended", edit_detention_path(:id => d.id), :class => "link", :id=>"l_#{d.id}", remote: true %><%  end %> </td>
+        <td><% if !d.completed %> <%= link_to "attended", edit_detention_path(:id => d.id), :class => "btn  btn-sm btn-success link", :id=>"l_#{d.id}", remote: true %><%  end %> </td>
       </tr>
   <% end %>
   </tbody>

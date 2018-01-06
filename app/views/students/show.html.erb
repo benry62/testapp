@@ -1,23 +1,26 @@
 <h2><%= @student.fore_name + " " + @student.last_name %></h2>
 
-<p><strong>Form: </strong><%= @student.form.name %> 
-<%= link_to 'edit', edit_student_path(@student.id) %> | <%= link_to 'back', students_path %>
+<p><strong>Form: </strong><%= @student.form.name %>
+<%= link_to 'edit', edit_student_path(@student.id) %>
 
 
 <h3>Detentions</h3>
-<table width="70%" id="ud_tab" class="tablesorter">
+<table width="80%" id="ud_tab">
   <thead>
     <tr>
-      <th width="20%">Date set</th>
-      <th width="25%">Reason</th>
+      <th width="15%">Date due</th>
+      <th width="15%">Date set</th>
       <th width="15%">Type</th>
-      <th width="20%">Set by</th>
+      <th width="25%">Reason</th>
+      <th width="15%">Set by</th>
       <th>Completed</th>
     </tr>
   </thead>
   <tbody>
 <% @student.detentions.each do |d| %>
-  <tr class="<%= cycle('even', 'odd') %>"><td><%= link_to  d.date_due.strftime("%a %-d %b %y"), edit_detention_path(d.id) %></td><td><%= d.reason %></td><td><%= d.d_type.humanize %></td><td><%= d.user.name %></td><td><%= d.completed %></td></tr>
+  <tr class="<%= cycle('even', 'odd') %><% if d.is_overdue %> overdue<% end %>"><td><%= link_to  d.date_due.strftime("%a %-d %b %y"), edit_detention_path(d.id) %></td><td><%= d.date_set.strftime("%a %-d %b %y")%></td><td><%= d.d_type.humanize %></td><td><%= d.reason %></td><td><%= d.user.name %></td><td><%= human_boolean(d.completed) %></td></tr>
 <% end %>
   </tbody>
 </table>
+<br />
+<p><%= link_to 'back', students_path %></p>

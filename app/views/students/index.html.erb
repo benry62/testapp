@@ -5,8 +5,9 @@
 <table id="students_table">
   <thead>
     <tr>
-      <th width="50%">Name</th>
-      <th width="50%">Form</th>
+      <th width="33%">Name</th>
+      <th width="33%">Form</th>
+      <th>Detentions</th>
     </tr>
   </thead>
   <tbody>
@@ -14,7 +15,7 @@
 
     <% @student.each do |t| %>
       <tr class="<%= cycle('even', 'odd') %>">
-        <td><%= link_to (t.fore_name + " " + t.last_name), student_path(:id => t.id) %> </td><td> <%= t.form.name %>  </td>
+        <td><%= link_to (t.fore_name + " " + t.last_name), student_path(:id => t.id) %> </td><td> <%= t.form.name %>  </td><td><%=t.detention_count(t.id) %></td>
       </tr>
     <% end %>
 </tbody>

@@ -73,7 +73,7 @@ $(document).on('turbolinks:load', function() {
     // now have to send all of this via Ajax as datepicker functions are re-setting
     var valuesToSubmit = $("[id^='edit_detention_']").serialize();
     $.ajax({
-        type: 'POST',
+        type: 'PATCH',
         url: $("[id^='edit_detention_']").attr('action'),
         dataType: 'json',
         data: valuesToSubmit,

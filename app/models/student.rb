@@ -12,6 +12,10 @@ class Student < ApplicationRecord
     "#{fore_name} #{last_name}"
   end
 
+  def detention_count(id)
+    Detention.where("student_id = ?", id).count
+  end
+
 
 
 end

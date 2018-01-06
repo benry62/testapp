@@ -1,6 +1,8 @@
 class Detention < ApplicationRecord
   belongs_to :user
   belongs_to :student
+
+  has_many :versions
   validate :due_date_cant_be_before_set_date
 
 

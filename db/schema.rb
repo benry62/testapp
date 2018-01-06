@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180104174053) do
+ActiveRecord::Schema.define(version: 20180106183200) do
 
   create_table "departments", force: :cascade do |t|
     t.text "name"
@@ -79,6 +79,18 @@ ActiveRecord::Schema.define(version: 20180104174053) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
+  end
+
+  create_table "versions", force: :cascade do |t|
+    t.integer "detention_id"
+    t.string "d_type"
+    t.integer "user_id"
+    t.datetime "date_due"
+    t.datetime "update_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["detention_id"], name: "index_versions_on_detention_id"
+    t.index ["user_id"], name: "index_versions_on_user_id"
   end
 
 end

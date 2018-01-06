@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   root to: "detentions#index"
 
 
@@ -11,6 +12,7 @@ Rails.application.routes.draw do
   resources :users
   resources :students
   resources :detentions
+  resources :versions
 
 
 

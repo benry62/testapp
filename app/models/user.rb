@@ -9,6 +9,7 @@ class User < ApplicationRecord
   belongs_to :role
 
   has_many :detentions
+  has_many :versions
 
   accepts_nested_attributes_for :department
 

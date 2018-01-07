@@ -18,17 +18,19 @@
           <%= link_to image_tag('site_logo.png', height: '40'), detentions_path, :class => "navbar-brand" %></li>
         </div>
         <ul class="nav navbar-nav">
-          <li style="padding:5px"><%= link_to "Home", detentions_path, :class => "active" %> </li>
-          <li style="padding:5px"><%= link_to " Students ", students_path %></li>
-          <li style="padding:5px"><%= link_to "Staff ", users_path %></li>
-          <li style="padding:5px"><%= link_to "Forms ", forms_path %></li>
-          <li class="dropdown" style="padding:5px">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><%= render 'devise/menu/registration_items' %></li>
-            <li><%= render 'devise/menu/login_items' %></li>
-          </ul>
-        </li>
+          <% if user_signed_in? %>
+            <li style="padding:5px"><%= link_to "Home", detentions_path, :class => "active" %> </li>
+            <li style="padding:5px"><%= link_to " Students ", students_path %></li>
+            <li style="padding:5px"><%= link_to "Staff ", users_path %></li>
+            <li style="padding:5px"><%= link_to "Forms ", forms_path %></li>
+            <li class="dropdown" style="padding:5px">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <%= current_user.name %> <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><%= render 'devise/menu/registration_items' %></li>
+                <li><%= render 'devise/menu/login_items' %></li>
+              </ul>
+            </li>
+          <% end %>
         </ul>
       </div>
     </nav>

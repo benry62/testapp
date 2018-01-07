@@ -1,11 +1,10 @@
-
-
 $(document).on('turbolinks:load', function() {
-
 
 
   $("#as_button").hide();
   $("#update").hide();
+  $("#dh").hide();
+
   $( "#detention_student_name" ).autocomplete({
     minLength: 2,
     source: $('#detention_student_name').data('autocomplete-source'),
@@ -15,12 +14,11 @@ $(document).on('turbolinks:load', function() {
       }
     },
     select: function (event, ui) {
-          $("#detention_student_name").val(ui.item.label); // display the selected text
-          $("#detention_student_id").val(ui.item.value); // save selected id to hidden input
-          return false;
-        }
-    });
-
+      $("#detention_student_name").val(ui.item.label); // display the selected text
+      $("#detention_student_id").val(ui.item.value); // save selected id to hidden input
+      return false;
+    }
+  });
 
   $("#student_submit").click(function(){
     var valuesToSubmit = $("#new_student").serialize();
@@ -45,9 +43,6 @@ $(document).on('turbolinks:load', function() {
   var detention_dd = ($("#detention_date_due").val() === undefined) ?  '' :  $("#detention_date_due").val()
   var detention_dc = ($("#detention_date_completed").val() === undefined) ?  '' :  $("#detention_date_completed").val()
 
-
-
-
   $('#detention_date_set').datepicker({
     beforeShowDay: $.datepicker.noWeekends
     })
@@ -69,15 +64,23 @@ $(document).on('turbolinks:load', function() {
 
 
   $("#rollover").click(function(){
-    console.log("rollover clicked")
     // Get the next day
     var dd = $('#detention_date_due').datepicker('getDate')
     var add_days = (dd.getDay() == 5) ? 3 : 1 // tests if Friday
     $('#detention_date_due').datepicker( "setDate", new Date(addDays(dd, add_days)) )
     // now have to send all of this via Ajax as datepicker functions are re-setting
     var valuesToSubmit = $("[id^='edit_detention_']").serialize();
-    handle_ajax (valuesToSubmit, "rolled over")
+    handle_ajax (valuesToSubmit, "rolled over", "PATCH")
     return false
+  })
+
+
+  $("#delete").click(function(){
+    var valuesToSubmit = $("[id^='edit_detention_']").serialize();
+    if (confirm ("This will permanently delete this detention. Are you sure you wish to continue?")){
+        handle_ajax (valuesToSubmit, "deleted", "DELETE")
+    };
+    return false;
   })
 
   $("#complete").click(function(){
@@ -86,13 +89,21 @@ $(document).on('turbolinks:load', function() {
         completed: 1
       }
     };
-    handle_ajax (send_data, "completed")
+    handle_ajax (send_data, "completed", "PATCH")
+    return false
+  });
+
+  $("#uncomplete").click(function(){
+    let send_data = {
+      detention: {
+        completed: 0
+      }
+    };
+    handle_ajax (send_data, "re-set", "PATCH")
     return false
   });
 
   $("#update").click(function() {
-    console.log("update clicked")
-
     var nv
     var d_types = $("#detention_types").text()
     var res = d_types.split(",");
@@ -105,11 +116,11 @@ $(document).on('turbolinks:load', function() {
     } else {
        nv = res[rl-1]
     }
+
     $("#detention_d_type").val(nv)
     var vts = $("[id^='edit_detention_']").serialize();
-    handle_ajax (vts, "updated")
+    handle_ajax (vts, "updated", "PATCH")
     return false
-
   });
 
   $("#ub").click(function(){
@@ -117,9 +128,9 @@ $(document).on('turbolinks:load', function() {
     return false;
   });
 
-  $("#dh").hide();
   $("#dhh").click(function(){
     $("#dh").slideToggle("slow");
+    return false;
   });
 
   function uk_to_us_date(date_string) {
@@ -134,9 +145,9 @@ $(document).on('turbolinks:load', function() {
     return result;
   }
 
-  function handle_ajax (valuesToSubmit, verb) {
+  function handle_ajax (valuesToSubmit, verb, action) {
     $.ajax({
-      type: 'PATCH',
+      type: action,
       url: $("[id^='edit_detention_']").attr('action'),
       data: valuesToSubmit,
       success: function(data, textStatus, jqXHR) {

@@ -90,10 +90,15 @@
         <div class="col-sm-10" id="update">
           <br />
           <div class="btn-group btn-med" role="group" aria-label="Basic example">
-            <a href="#" id="complete" role="button" class="btn  btn-primary" >Complete</a>
+
+            <% if @detention.completed %>
+              <a href="#" id="uncomplete" role="button" class="btn  btn-primary" >Undo</a>
+            <% else %>
+              <a href="#" id="complete" role="button" class="btn  btn-primary" >Complete</a>
+            <% end %>
             <a href="#" id="rollover" role="button" class="btn  btn-primary" >Rollover</a>
             <a href="#" id="update" role="button" class="btn  btn-primary" >Escalate</a>
-            <%= link_to "Delete", detention_path, method: :delete, class: "btn  btn-danger", data: { confirm: "This will permanently delete this detention. Are you sure?" }  %>
+            <%= link_to "Delete", detention_path, method: :delete, class: "btn  btn-danger", id: "delete", data: { confirm: "This will permanently delete this detention. Are you sure?" }  %>
           </div>
           <br />
         </div>

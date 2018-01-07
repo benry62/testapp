@@ -7,87 +7,128 @@
   </ul>
 <% end %>
 
-<%= form_for(@detention, :html => {:class => "form-horizontal"}) do |f| %>
-  <div class="form-group row">
-    <%= f.label :student_name, :class => "col-sm-2 col-form-label"  %>
-    <div class="col-sm-5">
-    <%= f.text_field :student_name, data: { autocomplete_source: students_path}, :class => "form-control" %>
+<div class="row">
+  <div class="col-md-6">
+
+  <%= form_for(@detention, :html => {:class => "form-horizontal"}) do |f| %>
+    <div class="form-group row">
+      <%= f.label :student_name, :class => "col-sm-3 col-form-label"  %>
+      <div class="col-sm-9">
+      <%= f.text_field :student_name, data: { autocomplete_source: students_path}, :class => "form-control" %>
+      </div>
     </div>
+
+
+
+    <% unless f.object.persisted?() %>
+      <a href="#myModal" id="as_button" role="button" class="btn btn-med btn-primary" data-toggle="modal">Add new student</a>
+    <% end %>
+
+
+    <div class="form-group row">
+      <%= f.label :detention_type, :class => "col-sm-3 col-form-label" %>
+      <div class="col-sm-9">
+        <%= f.collection_select(:d_type, d_types, :first, :first, :class => "form-control")  %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :user_id, "Staff", :class => "col-sm-3 col-form-label" %>
+        <div class="col-sm-9">
+          <% selected = f.object.persisted?() ? @detention.user.id : current_user.id %>
+        <%= f.collection_select(:user_id, @users, :id, :name, {:selected => selected}, :class => "form-control" ) %>
+      </div>
+    </div>
+
+
+
+    <div class="form-group row">
+      <%= f.label :reason, :class => "col-sm-3 col-form-label"  %>
+      <div class="col-sm-9">
+        <%= f.text_field :reason, :class => "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :date_set, :class => "col-sm-3 col-form-label"  %>
+      <div class="col-sm-9">
+        <div class="input-group date" data-provide="datepicker">
+          <% value = f.object.persisted?() ? @detention.date_set.strftime("%d/%m/%y") : Date.today.strftime("%d/%m/%y") %>
+          <%= f.text_field :date_set, :class =>"form-control", :value => value %>
+          <div class="input-group-addon">
+              <span class="glyphicon glyphicon-th"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :date_due, :class => "col-sm-3 col-form-label"  %>
+      <div class="col-sm-9">
+        <div class="input-group date" data-provide="datepicker">
+          <% value_plus_one = f.object.persisted?() ? @detention.date_due.strftime("%d/%m/%y") : @detention.not_weekend.strftime("%d/%m/%y") %>
+          <%= f.text_field :date_due, :class =>"form-control", :value => value_plus_one %>
+          <div class="input-group-addon">
+              <span class="glyphicon glyphicon-th"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= f.hidden_field :student_id%>
+    <br />
+    <p><%= f.submit (controller.action_name + " detention").titleize %></p>
+    <br />
+    <%= link_to "Back", detentions_path %>
+
   </div>
 
-  <% unless f.object.persisted?() %>
-    <a href="#myModal" id="as_button" role="button" class="btn btn-med btn-primary" data-toggle="modal">Add new student</a>
+
+  <div class="col-md-6">
+    <!-- <div class="row"> -->
+      <% if f.object.persisted?() %>
+      <a href="#" id="ub" role="button" class="btn btn-med btn-success" >Tools</a>
+        <div class="col-sm-10" id="update">
+          <br />
+          <div class="btn-group btn-med" role="group" aria-label="Basic example">
+            <a href="#" id="complete" role="button" class="btn  btn-primary" >Complete</a>
+            <a href="#" id="rollover" role="button" class="btn  btn-primary" >Rollover</a>
+            <a href="#" id="update" role="button" class="btn  btn-primary" >Escalate</a>
+            <%= link_to "Delete", detention_path, method: :delete, class: "btn  btn-danger", data: { confirm: "This will permanently delete this detention. Are you sure?" }  %>
+          </div>
+          <br />
+        </div>
+        <div class="row">
+          <div class="col-sm-12" >
+            <h3 id="dhh">Detention history</h3>
+            <div id="dh">
+              <table width="100%" >
+                <thead>
+                  <tr>
+                    <th width="33%">Date updated</th>
+                    <th>Detention</th>
+                    <th width="25%">Staff</th>
+                    <th width="22%">Date due</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @versions.each do |v| %>
+                  <tr class="<%= cycle('even', 'odd') %>">
+                    <td> <%= v.update_date.strftime("%l:%M%P %a %-d %b %y") %></td><td><%= v.d_type.humanize %></td><td><%= v.user.name %></td><td><%= v.date_due.strftime("%a %-d %b %y") %></td>
+                  </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div> <!-- end of col-sm-12 -->
+        </div> <!-- end of row -->
+
+
+      <%  end %>
   <% end %>
 
+  </div> <!-- end of col-md-6 -->
 
-  <div class="form-group row">
-    <%= f.label :detention_type, :class => "col-sm-2 col-form-label" %>
-    <div class="col-sm-5">
-      <%= f.collection_select(:d_type, d_types, :first, :first, :class => "form-control")  %>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <%= f.label :user_id, "Staff", :class => "col-sm-2 col-form-label" %>
-      <div class="col-sm-5">
-        <% selected = f.object.persisted?() ? @detention.user.id : current_user.id %>
-      <%= f.collection_select(:user_id, @users, :id, :name, {:selected => selected}, :class => "form-control" ) %>
-    </div>
-  </div>
-
-
-
-  <div class="form-group row">
-    <%= f.label :reason, :class => "col-sm-2 col-form-label"  %>
-    <div class="col-sm-5">
-      <%= f.text_field :reason, :class => "form-control" %>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <%= f.label :date_set, :class => "col-sm-2 col-form-label"  %>
-    <div class="col-sm-5">
-      <div class="input-group date" data-provide="datepicker">
-        <% value = f.object.persisted?() ? @detention.date_set.strftime("%d/%m/%y") : Date.today %>
-        <%= f.text_field :date_set, :class =>"form-control", :value => value %>
-        <div class="input-group-addon">
-            <span class="glyphicon glyphicon-th"></span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <%= f.label :date_due, :class => "col-sm-2 col-form-label"  %>
-    <div class="col-sm-5">
-      <div class="input-group date" data-provide="datepicker">
-        <% value_plus_one = f.object.persisted?() ? @detention.date_due.strftime("%d/%m/%y") : @detention.not_weekend %>
-        <%= f.text_field :date_due, :class =>"form-control", :value => value_plus_one %>
-        <div class="input-group-addon">
-            <span class="glyphicon glyphicon-th"></span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <% if f.object.persisted?() %>
-  <a href="#" id="ub" role="button" class="btn btn-med btn-success" >Tools</a>
-    <div class="jumbotron col-sm-7" id="update">
-      <div class="btn-group btn-med" role="group" aria-label="Basic example">
-        <a href="#" id="complete" role="button" class="btn  btn-primary" >Complete</a>
-        <a href="#" id="rollover" role="button" class="btn  btn-primary" >Rollover</a>
-        <a href="#" id="update" role="button" class="btn  btn-primary" >Escalate</a>
-        <%= link_to "Delete", detention_path, method: :delete, class: "btn  btn-danger", data: { confirm: "This will permanently delete this detention. Are you sure?" }  %>
-      </div>
-    </div>
-    <%  end %>
-
-  </br >
-  <%= f.hidden_field :student_id%>
-  </br>
-  <p><%= f.submit (controller.action_name + " detention").titleize %></p>
-
-<% end %>
+</div>
 <div id="detention_types"><%= d_types_keys %></div>
 
 <% if @student %>

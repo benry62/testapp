@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180106183200) do
+ActiveRecord::Schema.define(version: 20180106190714) do
 
   create_table "departments", force: :cascade do |t|
     t.text "name"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 20180106183200) do
     t.datetime "update_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "version_count"
     t.index ["detention_id"], name: "index_versions_on_detention_id"
     t.index ["user_id"], name: "index_versions_on_user_id"
   end

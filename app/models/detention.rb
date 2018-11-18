@@ -40,7 +40,6 @@ class Detention < ApplicationRecord
   end
 
   def is_escalated(params)
-    debugger
     if params[:detention][:escalate]
       if params[:detention][:escalate] == "1"
         return [params.except[:detention][:escalate], true]

@@ -119,7 +119,7 @@ $(document).on('turbolinks:load', function() {
 
     $("#detention_d_type").val(nv)
     var vts = $("[id^='edit_detention_']").serialize();
-    handle_ajax (vts, "updated", "PATCH")
+    handle_ajax (vts, "escalated", "PATCH")
     return false
   });
 
@@ -151,7 +151,7 @@ $(document).on('turbolinks:load', function() {
       url: $("[id^='edit_detention_']").attr('action'),
       data: valuesToSubmit,
       success: function(data, textStatus, jqXHR) {
-        if (confirm ("detention " + verb)) {
+        if (confirm ("Success. The detention was " + verb + ".")) {
             window.location.href = "/detentions";
         };
       }
